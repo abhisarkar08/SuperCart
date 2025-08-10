@@ -1,21 +1,20 @@
 import { useEffect } from 'react';
-import axios from './api/Axioscon'
+import { asyncgetuser} from "./Store/UserAction";
+import { useDispatch, useSelector } from 'react-redux';
+import Mainroutes from './routes/Mainroutes';
+import Nav from './components/Nav';
 const App = () => {
-  const getpro = async () =>{
-    try{
-      const res = await axios.get("/products");
-      console.log(res);
-    }
-    catch(error){
-      console.log(error);
-    }
-  }
+  const data = useSelector((state) => state.user.data);
+  const dispatch = useDispatch();
 
   useEffect(() =>{
-    getpro();
+    dispatch(asyncgetuser());
   }, []);
   return (
-    <div>App</div>
+    <div className='text-white font-thin w-screen h-screen bg-gray-800'>
+      <Nav/>
+      <Mainroutes/>
+    </div>
   )
 }
 
