@@ -11,7 +11,7 @@ const Login = () => {
   };
 
   return (
-    <div className='mx-auto max-w-[484px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
+    <div className='mx-auto max-w-[424px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
       <form
         onSubmit={handleSubmit(onLoginHandler)}
         className="flex flex-col gap-4 px-5 py-7 mt-12 bg-white text-black rounded-2xl"
@@ -30,7 +30,7 @@ const Login = () => {
           </label>
           <input
             {...register("email", { required: "Please enter email!" })}
-            className="border-solid border-2 border-gray-300 rounded-lg px-3 py-[4px] text-md bg-gray-100 font-normal text-lg w-full"
+            className="border-solid focus:outline-none focus:border-gray-300 focus:shadow-[0_0_15px_rgba(0,0,0,0.2)] transition-all duration-200 border-gray-300 rounded-lg px-3 py-[4px] text-md bg-gray-100 font-normal text-lg w-full"
             type="email"
           />
           {errors.email && <p className="text-red-500 text-[clamp(0.85rem,1.32vw,0.92rem)] font-normal ml-0.5">{errors.email.message}</p>}
@@ -39,7 +39,7 @@ const Login = () => {
           <label className="block text-[clamp(0.85rem,1.30vw,1.05rem)] font-bold ml-0.5 text-gray-600">Password</label>
           <input
             {...register("password", { required: true })}
-            className="border-solid border-2 border-gray-300 rounded-lg px-3 py-[4px] text-md  bg-gray-100 font-semibold text-lg w-full"
+            className="border-solid focus:outline-none focus:border-gray-300 focus:shadow-[0_0_15px_rgba(0,0,0,0.2)] transition-all duration-200 border-gray-300 rounded-lg px-3 py-[4px] text-md  bg-gray-100 font-semibold text-lg w-full"
             type="password"
           />
           {errors.password && (
@@ -54,7 +54,7 @@ const Login = () => {
             Login
           </button>
         </div>
-        <p className='text-[clamp(0.875rem,1.3vw,1.1rem)] font-medium ml-1 text-center'>
+        <p className='text-[clamp(0.875rem,1.3vw,1rem)] font-medium ml-1 text-center'>
           Don't have an account? <Link className='text-blue-400' to="/register">Register</Link>
         </p>
       </form>

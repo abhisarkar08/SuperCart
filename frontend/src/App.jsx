@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
-import { asyncgetuser} from "./Store/UserAction";
+import { asyncgetuser} from "./Store/Actions/UserAction";
 import { useDispatch, useSelector } from 'react-redux';
 import Mainroutes from './routes/Mainroutes';
 import Nav from './components/Nav';
 const App = () => {
-  const data = useSelector((state) => state.user.data);
+  const data = useSelector((state) => state.userReducer.data);
   const dispatch = useDispatch();
 
   useEffect(() =>{
     dispatch(asyncgetuser());
-  }, []);
+  }, [dispatch]);
   return (
     <div className='text-white font-thin w-screen h-screen bg-white flex flex-col'>
       <Nav/>
