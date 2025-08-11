@@ -11,9 +11,11 @@ const App = () => {
     dispatch(asyncgetuser());
   }, []);
   return (
-    <div className='text-white font-thin w-screen h-screen bg-gray-800'>
+    <div className='text-white font-thin w-screen h-screen bg-white flex flex-col'>
       <Nav/>
-      <Mainroutes/>
+      <div className="flex-1 overflow-y-auto px-4">
+        <Mainroutes />
+      </div>
     </div>
   )
 }
