@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { nanoid } from 'nanoid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip'
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { asyncpostuser } from "../Store/Actions/UserAction";
@@ -8,12 +8,14 @@ import { useDispatch } from 'react-redux';
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
+  const navig = useNavigate();
 
   const onRegisterHandler = (data) => {
     data.id = nanoid();
-    data.isAdmin = false
+    data.isAdmin = true
     dispatch(asyncpostuser(data));
     reset()
+    navig("/home");
   };
 
   return (

@@ -1,17 +1,26 @@
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip'
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { useDispatch } from 'react-redux';
+import { asyncgetuser} from "../Store/Actions/UserAction";
 const Login = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const dispatch = useDispatch();
+  const navig = useNavigate()
 
-  const onLoginHandler = (data) => {
-    console.log(data);
-    reset();
+  const onLoginHandler = async (data) => {
+    const success = await dispatch(asyncgetuser(data));
+    if (success) {
+      navig("/home"); 
+      reset();
+    } else {
+      alert("Invalid credentials");
+    }
   };
 
   return (
-    <div className='mx-auto max-w-[424px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
+    <div className='mx-auto max-w-[424px] mb-[20%]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
       <form
         onSubmit={handleSubmit(onLoginHandler)}
         className="flex flex-col gap-4 px-5 py-7 mt-12 bg-white text-black rounded-2xl"

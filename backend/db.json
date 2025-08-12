@@ -19,7 +19,27 @@
       "username": "jhone",
       "email": "jhone@gmail.com",
       "password": "123",
-      "isAdmin":"true"
+      "isAdmin": "true",
+      "phone": "99102558",
+      "count": "India",
+      "city": "Delhi",
+      "add": "vidisha",
+      "area": "pat",
+      "code": "1192"
+    },
+    {
+      "id": "ZKS03ORCmuPl2i0WMgJs4",
+      "username": "cc",
+      "password": "aa",
+      "email": "sarkarsharmita08@gmail.com",
+      "isAdmin": true,
+      "phone": "9810057396",
+      "count": "india",
+      "city": "delhi",
+      "add": "aaa",
+      "area": "pat",
+      "code": "11026",
+      "name": "cc"
     }
   ],
   "cart": []

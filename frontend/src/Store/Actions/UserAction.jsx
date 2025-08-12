@@ -2,41 +2,47 @@ import axios from '../../api/Axioscon';
 import { loadUser } from '../Reducers/UserSlice';
 
 export const asynccurrentuser = () => async (dispatch, getState) => {
-    try {
-      const user = JSON.parse(localStorage.getItem("user"))
-      if(user) dispatch(loadUser(user))
-      else console.log("User not logged in !!")
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-export const asynclogoutuser = () => async (dispatch, getState) => {
-    try {
-      localStorage.setItem("user", "")
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-export const asyncgetuser = () => async (dispatch, getState) => {
   try {
-    const {res} = await axios.get(
-        `/users?email=${user.email}&password=${user.password}`
-    );
-    console.log(data[0]);
-    localStorage.setItem("user", JSON.stringify(data[0]))
+    const stored = localStorage.getItem("user");
+    if (!stored) return console.log("User not logged in !!");
+    const user = JSON.parse(stored);
+    if(user) dispatch(loadUser(user));
   } catch (error) {
     console.log(error);
   }
 };
 
+export const asynclogoutuser = () => async (dispatch, getState) => {
+    try {
+      localStorage.removeItem("user");
+      dispatch(loadUser(null));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const asyncgetuser = (user) => async (dispatch, getState) => {
+  try {
+    const res = await axios.get(
+      `/users?email=${user.email}&password=${user.password}`
+    );
+    if (res.data.length === 0) {
+      return false;
+    }
+    localStorage.setItem("user", JSON.stringify(res.data[0]));
+    dispatch(loadUser(res.data[0]));
+    return true
+  } catch (error) {
+    console.log(error);
+    return false
+  }
+};
 
 export const asyncpostuser = (user) => async (dispatch, getState) => {
   try {
     const res = await axios.post("/users", user);
-    dispatch(loadUser(res.data)); // agar sirf ek user return ho to
-    // agar list update chahiye to yaha dispatch(asyncgetuser()) bhi kar sakte ho
+    dispatch(loadUser(res.data));
+    localStorage.setItem("user", JSON.stringify(res.data)); 
   } catch (error) {
     console.log(error);
   }
