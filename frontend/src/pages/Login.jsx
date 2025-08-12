@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   return (
-    <div className='mx-auto max-w-[424px] mb-[20%]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
+    <div className='mx-auto max-w-[424px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
       <form
         onSubmit={handleSubmit(onLoginHandler)}
         className="flex flex-col gap-4 px-5 py-7 mt-12 bg-white text-black rounded-2xl"
@@ -64,7 +64,7 @@ const Login = () => {
           </button>
         </div>
         <p className='text-[clamp(0.875rem,1.3vw,1rem)] font-medium ml-1 text-center'>
-          Don't have an account? <Link className='text-blue-400' to="/register">Register</Link>
+          Don't have an account? <Link className='text-blue-400' to="/">Register</Link>
         </p>
       </form>
     </div>
