@@ -2,22 +2,24 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip'
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { useDispatch } from 'react-redux';
-import { asyncgetuser} from "../Store/Actions/UserAction";
+import { useDispatch, useSelector } from 'react-redux';
+import { asyncgetuser, asyncupdateuser} from "../Store/Actions/UserAction";
 const Login = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   const navig = useNavigate()
+  const user = useSelector(state => state.userReducer?.data);
 
   const onLoginHandler = async (data) => {
-    const success = await dispatch(asyncgetuser(data));
-    if (success) {
-      navig("/home"); 
-      reset();
-    } else {
-      alert("Invalid credentials");
-    }
-  };
+  const success = await dispatch(asyncgetuser(data));
+  if (success) {
+    navig("/home");
+    dispatch(asyncupdateuser(success.id, { isAdmin: true })); // sahi args
+    reset();
+  } else {
+    alert("Invalid credentials");
+  }
+};
 
   return (
     <div className='mx-auto max-w-[424px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>

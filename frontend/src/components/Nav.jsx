@@ -4,7 +4,7 @@ import { FaShoppingCart, FaSearch, FaUser, FaBars, FaTimes } from 'react-icons/f
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { asynccurrentuser } from '../Store/Actions/UserAction';
-import { asynclogoutuser } from '../Store/Actions/UserAction';
+import { asynclogoutuser, asyncupdateuser } from '../Store/Actions/UserAction';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Navbar = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const profileRef = useRef(null);
   const location = useLocation();
-  const user = useSelector(state => state.userReducer?.data);
+    const user = useSelector(state => state.userReducer?.data);
   const dispatch = useDispatch();
 
   // Check if current page is login or register
@@ -24,12 +24,12 @@ const Navbar = () => {
   }, [dispatch]);
 
   return (
-    <nav className="bg-white text-black border-b border-gray-200 ">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-gray-200 shadow-lg">
 
       {/* ---------- MOBILE NAVBAR ---------- */}
-      <div className="flex items-center justify-between px-4 py-3 lg:hidden">
+      <div className="flex items-center justify-between px-4 py-3 text-black lg:hidden">
         {/* Logo */}
-        <NavLink to="/home" className="text-[1.5rem] font-semibold tracking-tight">SuperCart</NavLink>
+        <NavLink to="/home" className="text-[1.5rem] font-semibold tracking-tight text-black">SuperCart</NavLink>
 
         {!isAuthPage && (
           <div className="flex items-center gap-2">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
                 className="flex items-center justify-center rounded-full bg-gray-100 w-10 h-10 hover:bg-gray-200 transition"
               >
-                <FaUser className="text-xl text-gray-500" />
+                <FaUser className="cursor-pointer text-xl text-gray-500" />
               </button>
               {/* Dropdown menu */}
               {showProfileDropdown && (
@@ -89,7 +89,7 @@ const Navbar = () => {
                     <span role="img" aria-label="orders">📦</span> My Orders
                   </NavLink>
                   <NavLink
-                    to="/wishlist"
+                    to="/whislist"
                     className="flex items-center gap-2 px-4 py-3 hover:bg-gray-100 transition text-gray-800"
                     onClick={() => setShowProfileDropdown(false)}
                   >
@@ -99,10 +99,11 @@ const Navbar = () => {
                     <button
                       onClick={() => {
                         setShowProfileDropdown(false);
+                        dispatch(asyncupdateuser(user.id, { isAdmin: false })); 
                         dispatch(asynclogoutuser()); // Redux logout action call
                         navigate("/login"); // 👈 logout ke baad login page pe bhej do
                       }}
-                      className="flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
+                      className="cursor-pointer flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
                     >
                       <span>↲</span> Logout
                     </button>
@@ -112,7 +113,7 @@ const Navbar = () => {
             </div>
 
             {/* Hamburger */}
-            <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 rounded-full hover:bg-gray-100">
+            <button onClick={() => setMenuOpen(!menuOpen)} className="text-black p-2 rounded-full hover:bg-gray-100">
               {menuOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
             </button>
           </div>
@@ -136,7 +137,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Links - Overlay */}
       {!isAuthPage && menuOpen && (
-        <div className="absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
+        <div className="text-black absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
           <div className="flex flex-col gap-3 font-semibold">
             <NavLink to="/electronics">Electronics</NavLink>
             <NavLink to="/fashion">Fashion</NavLink>
@@ -149,7 +150,7 @@ const Navbar = () => {
       )}
 
       {/* ---------- DESKTOP NAVBAR ---------- */}
-      <div className={`hidden lg:flex items-center py-3 justify-between bg-white text-black mx-auto ${isAuthPage ? "px-6 py-2" : "max-w-[1500px]"}`}>
+      <div className={`hidden lg:flex items-center py-3 justify-between  text-black mx-auto ${isAuthPage ? "px-6 py-2" : "max-w-[1500px]"}`}>
         {/* Logo hamesha dikhana */}
         <NavLink
           to="/home"
@@ -190,7 +191,7 @@ const Navbar = () => {
                   onClick={() => setShowProfileDropdown(!showProfileDropdown)}
                   className="flex items-center justify-center rounded-full bg-gray-100 w-10 h-10 hover:bg-gray-200 xl:w-14 xl:h-14 xl:p-4 transition-all duration-200 ease-in-out"
                 >
-                  <FaUser className="text-xl text-gray-500 xl:text-2xl" />
+                  <FaUser className="cursor-pointer text-xl text-gray-500 xl:text-2xl" />
                 </button>
                 {showProfileDropdown && (
                   <div className="absolute right-0 top-14 w-64 rounded-xl bg-white shadow-xl border border-gray-200 overflow-hidden z-50">
@@ -227,12 +228,23 @@ const Navbar = () => {
                     </NavLink>
                     {user ? (
                       <button
-                        onClick={() => {
+                        onClick={async () => { // 👈 async banaya
                           setShowProfileDropdown(false);
-                          dispatch(asynclogoutuser()); // Redux logout action call
-                          navigate("/login"); // 👈 logout ke baad login page pe bhej do
+
+                          try {
+                            // 1. Backend update
+                            dispatch(asyncupdateuser(user.id, { isAdmin: false })); 
+
+                            // 2. Logout
+                            dispatch(asynclogoutuser());
+
+                            // 3. Navigate
+                            navigate("/login");
+                          } catch (err) {
+                            console.error("Logout failed:", err);
+                          }
                         }}
-                        className="flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
+                        className="cursor-pointer flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
                       >
                         <span>↲</span> Logout
                       </button>

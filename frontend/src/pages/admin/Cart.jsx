@@ -25,7 +25,7 @@ const Cart = () => {
                 {/* Continue Shopping Button - Responsive */}
                 <button 
                     onClick={() => navig('/home')}
-                    className='inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 md:py-4 md:px-8 text-sm sm:text-base md:text-lg rounded-lg transition-colors duration-200 cursor-pointer'
+                    className='inline-flex items-center gap-2 bg-black active:scale-97 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 md:py-4 md:px-8 text-sm sm:text-base md:text-lg rounded-lg transition-colors duration-200 cursor-pointer'
                 >
                     <FaArrowLeft className='text-xs sm:text-sm md:text-base' />
                     Continue Shopping

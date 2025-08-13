@@ -14,8 +14,8 @@ const Footer = () => {
             <div className='grid grid-cols-1 md:grid-cols-4 gap-12'>
                 {/* Company Info Section */}
                 <div className='space-y-6'>
-                    <h1 className='text-white text-[clamp(1.4rem,5vw,1.5rem)] font-semibold'>SuperCart</h1>
-                    <p className='text-[clamp(0.9rem,4vw,1rem)] text-gray-400 leading-relaxed'>
+                    <h1 className='text-white text-[clamp(1.4rem,4vw,1.7rem)] font-semibold'>SuperCart</h1>
+                    <p className='text-[clamp(0.9rem,3vw,1.4rem)] text-gray-400 leading-relaxed'>
                         SuperCart brings you a curated collection of quality essentials — delivered with unmatched service, speed, and style.
                     </p>
                     <div className='flex space-x-4 pt-4'>
@@ -36,50 +36,50 @@ const Footer = () => {
 
                 {/* Popular Categories */}
                 <div>
-                    <h2 className='text-white text-xl font-semibold mb-8'>Popular Categories</h2>
+                    <h2 className='text-white text-2xl font-semibold mb-8'>Popular Categories</h2>
                     <div className='space-y-4'>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Electronics</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Home & Kitchen</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Fashion</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Groceries</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Beauty</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Sports</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Electronics</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Home & Kitchen</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Fashion</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Groceries</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Beauty</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Sports</p>
                     </div>
                 </div>
 
                 {/* Customer Service */}
                 <div>
-                    <h2 className='text-white text-xl font-semibold mb-8'>Customer Service</h2>
+                    <h2 className='text-white text-2xl font-semibold mb-8'>Customer Service</h2>
                     <div className='space-y-4'>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Contact Us</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Shipping Info</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Returns & Exchanges</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>FAQ</p>
-                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-base'>Size Guide</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Contact Us</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Shipping Info</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Returns & Exchanges</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>FAQ</p>
+                        <p className='text-gray-400 hover:text-white cursor-pointer transition-colors text-lg'>Size Guide</p>
                     </div>
                 </div>
 
                 {/* Get in Touch */}
                 <div>
-                    <h2 className='text-white text-xl font-semibold mb-8'>Get in Touch</h2>
+                    <h2 className='text-white text-2xl font-semibold mb-8'>Get in Touch</h2>
                     <div className='space-y-5'>
                         <div className='flex items-center space-x-4'>
                             <div className='w-6 h-6 flex items-center justify-center'>
                                 <FaPhone className='text-gray-400 text-sm'/>
                             </div>
-                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>1-800-SHOP-NOW</p>
+                            <p className='text-gray-400 text-lg hover:text-white cursor-pointer transition-colors'>1-800-SHOP-NOW</p>
                         </div>
                         <div className='flex items-center space-x-4'>
                             <div className='w-6 h-6 flex items-center justify-center'>
                                 <FaEnvelope className='text-gray-400 text-sm'/>
                             </div>
-                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>support@pixelcart.com</p>
+                            <p className='text-gray-400 text-lg hover:text-white cursor-pointer transition-colors'>support@pixelcart.com</p>
                         </div>
                         <div className='flex items-start space-x-4'>
                             <div className='w-6 h-6 flex items-center justify-center mt-1'>
                                 <FaMapMarkerAlt className='text-gray-400 text-sm'/>
                             </div>
-                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>123 Commerce St, City, State 12345</p>
+                            <p className='text-gray-400 text-lg hover:text-white cursor-pointer transition-colors'>123 Commerce St, City, State 12345</p>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@ const Footer = () => {
             {/* Bottom Copyright Section */}
             <div className='border-t border-gray-800 mt-16 pt-10'>
                 <div className='text-center'>
-                    <p className='text-gray-500 text-medium'>© 2025 PixelCart. All rights reserved. | Privacy Policy | Terms of Service</p>
+                    <p className='opacity-90 text-lg'>© 2025 SuperCart. All rights reserved. | Privacy Policy | Terms of Service</p>
                 </div>
             </div>
         </div>
