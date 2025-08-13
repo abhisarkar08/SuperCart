@@ -29,16 +29,16 @@ const Sports = () => {
       <div className="space-y-8 text-black md:max-w-[1536px] md:mx-auto ">
         {/* Section 1: Content */}
         <section className="p-4 flex flex-col gap-1 justify-center items-center">
-          <h2 className="text-4xl font-semibold mb-2">Sports</h2>
-          <p className="text-lg font-normal opacity-60 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-[2.4rem] font-semibold mb-2">Sports</h2>
+          <p className="text-lg sm:text-[1.2rem] font-normal opacity-60 text-center">
           Gear up for action with quality sports equipment, activewear, and fitness accessories.
           </p>
-          <p className="font-normal text-sm opacity-50 mb-[3%]">{sportsProducts.length} Products Found</p>
+          <p className="font-normal text-sm sm:text-base opacity-60 mb-[3%]">{sportsProducts.length} Products Found</p>
 
-          <div className="flex flex-col w-full md:flex-row md:items-center gap-1 md:justify-end">
-            <label className="text-sm font-normal opacity-60">Sort By</label>
+          <div className="flex flex-col w-full md:flex-row md:items-center gap-1 md:justify-end md:gap-2">
+            <label className="text-base font-normal opacity-60">Sort By: </label>
             <select
-              className="bg-gray-200 p-1 rounded-lg font-normal"
+              className="bg-gray-100 p-1 rounded-lg font-normal sm:py-2 md:w-[15%] sm:px-2 md:text-md"
               value={sortType}
               onChange={(e) => setSortType(e.target.value)}
             >
@@ -53,31 +53,34 @@ const Sports = () => {
 
   
         {/* Section 2: Product Cards */}
-        <section className="flex flex-row gap-16">
-        <div className="hidden lg:flex flex-col gap-2 p-4 rounded w-[60%] max-w-[368px] h-[fit-content] shadow-md sticky top-[6%]">
-          <h2 className="text-lg font-semibold">Filter</h2>
-          <h3 className="text-md font-medium opacity-70">Price Range</h3>
+        <section className="flex flex-row gap-10 justify-center">
+        <div className="hidden lg:flex flex-col gap-6 px-6 py-4 rounded w-[43%] max-w-[368px] max-h-[240px] shadow-md -translate-y-15">
+          <h2 className="text-lg font-semibold">Filters</h2>
+
+          <div className="flex flex-col gap-3">
+            <h3 className="text-md font-medium opacity-80">Price Range</h3>
           
-          <div className="flex flex-row gap-1 w-full">
-            <input
-              type="number"
-              placeholder="0"
-              value={minPrice}
-              onChange={(e) => setMinPrice(e.target.value)}
-              className="border border-gray-300 p-1 rounded w-full"
-            />
-            <input
-              type="number"
-              placeholder="5000"
-              value={maxPrice}
-              onChange={(e) => setMaxPrice(e.target.value)}
-              className="border border-gray-300 p-1 rounded w-full"
-            />
+            <div className="flex flex-row gap-1 w-full">
+              <input
+                type="number"
+                placeholder="0"
+                value={minPrice}
+                onChange={(e) => setMinPrice(e.target.value)}
+                className="border border-gray-300 p-1 rounded-lg w-full"
+              />
+              <input
+                type="number"
+                placeholder="5000"
+                value={maxPrice}
+                onChange={(e) => setMaxPrice(e.target.value)}
+                className="border border-gray-300 p-1 rounded-lg w-full"
+              />
+            </div>
           </div>
           
           <button
             onClick={() => { setMinPrice(""); setMaxPrice(""); }}
-            className="bg-gray-200 p-2 rounded-lg font-medium cursor-pointer mt-2 hover:bg-gray-300"
+            className="bg-gray-100 p-2 rounded-xl font-medium cursor-pointer mt-2 hover:bg-gray-200"
           >
             Reset Filter
           </button>
@@ -85,7 +88,7 @@ const Sports = () => {
 
           <div>
             {sportsProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-8">
                 {sportsProducts.map((product) => (
                   <Card key={product.id} product={product} />
                 ))}

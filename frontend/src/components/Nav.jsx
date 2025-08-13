@@ -13,8 +13,16 @@ const Navbar = () => {
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const profileRef = useRef(null);
   const location = useLocation();
-    const user = useSelector(state => state.userReducer?.data);
+  const user = useSelector(state => state.userReducer?.data);
   const dispatch = useDispatch();
+
+  const navLinkClass = ({ isActive }) =>
+    `relative pb-1 transition-colors duration-300 
+    ${isActive ? 'text-blue-700' : 'text-black hover:text-blue-500'}
+    after:content-[''] after:absolute after:left-1/2 after:bottom-0 
+    after:h-[2px] after:w-0 after:bg-blue-500 after:transition-all after:duration-300 
+    after:-translate-x-1/2 hover:after:w-full ${isActive ? 'after:w-full' : ''}`;
+
 
   // Check if current page is login or register
   const isAuthPage = location.pathname === "/login" || location.pathname === "/";
@@ -139,22 +147,22 @@ const Navbar = () => {
       {!isAuthPage && menuOpen && (
         <div className="text-black absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
           <div className="flex flex-col gap-3 font-semibold">
-            <NavLink to="/electronics">Electronics</NavLink>
-            <NavLink to="/fashion">Fashion</NavLink>
-            <NavLink to="/groceries">Groceries</NavLink>
-            <NavLink to="/homeappli">Home & Appliances</NavLink>
-            <NavLink to="/beauty">Beauty</NavLink>
-            <NavLink to="/sports">Sports</NavLink>
+            <NavLink to="/electronics" className={navLinkClass}>Electronics</NavLink>
+            <NavLink to="/fashion" className={navLinkClass}>Fashion</NavLink>
+            <NavLink to="/groceries" className={navLinkClass}>Groceries</NavLink>
+            <NavLink to="/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
+            <NavLink to="/beauty" className={navLinkClass}>Beauty</NavLink>
+            <NavLink to="/sports" className={navLinkClass}>Sports</NavLink>
           </div>
         </div>
       )}
 
       {/* ---------- DESKTOP NAVBAR ---------- */}
-      <div className={`hidden lg:flex items-center py-3 justify-between  text-black mx-auto ${isAuthPage ? "px-6 py-2" : "max-w-[1500px]"}`}>
+      <div className={`hidden lg:flex items-center py-2 px-4 justify-between  text-black mx-auto ${isAuthPage ? "px-6 py-2" : "max-w-[1320px]"}`}>
         {/* Logo hamesha dikhana */}
         <NavLink
           to="/home"
-          className="text-[1.5rem] font-bold tracking-tight xl:text-[2.1rem] transition-all duration-200 ease-in-out"
+          className="text-[1.2rem] font-bold tracking-tight xl:text-[1.5rem] transition-all duration-200 ease-in-out"
         >
           SuperCart
         </NavLink>
@@ -162,36 +170,36 @@ const Navbar = () => {
         {/* Agar auth page nahi hai tabhi ye sab dikhao */}
         {!isAuthPage && (
           <>
-            <div className="flex gap-6 text-sm font-medium text-black xl:text-lg transition-all duration-200 ease-in-out ">
-              <NavLink to="/electronics">Electronics</NavLink>
-              <NavLink to="/fashion">Fashion</NavLink>
-              <NavLink to="/groceries">Groceries</NavLink>
-              <NavLink to="/homeappli">Home & Appliances</NavLink>
-              <NavLink to="/beauty">Beauty</NavLink>
-              <NavLink to="/sports">Sports</NavLink>
+            <div className="flex gap-5 text-sm font-medium text-black  transition-all duration-200 ease-in-out ">
+              <NavLink to="/electronics" className={navLinkClass}>Electronics</NavLink>
+              <NavLink to="/fashion" className={navLinkClass}>Fashion</NavLink>
+              <NavLink to="/groceries" className={navLinkClass}>Groceries</NavLink>
+              <NavLink to="/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
+              <NavLink to="/beauty" className={navLinkClass}>Beauty</NavLink>
+              <NavLink to="/sports" className={navLinkClass}>Sports</NavLink>
             </div>
 
             {/* Search Bar */}
-            <div className="transition-all duration-200 ease-in-out flex items-center gap-2 bg-gray-100 border border-solid border-gray-400 rounded-xl px-4 py-0.2 w-[30%] focus-within:shadow-lg focus-within:ring-3 focus-within:ring-gray-300">
+            <div className="transition-all duration-200 ease-in-out flex items-center gap-3 bg-gray-50 border border-solid border-gray-300 rounded-xl px-4 py-0.5 w-[35%] focus-within:shadow-lg focus-within:ring-3 focus-within:ring-gray-300">
               <FaSearch className='text-gray-500' />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="bg-transparent outline-none text-lg p-1 xl:text-xl"
+                className="bg-transparent outline-none text-base font-normal p-1"
               />
             </div>
 
             {/* Right Side */}
             <div className="flex gap-4">
-              <NavLink to="/cart" className="transition-all duration-200 ease-in-out flex items-center justify-center rounded-full bg-gray-100 w-10 h-10 hover:bg-gray-200 xl:w-14 xl:h-14 xl:p-4">
-                <FaShoppingCart className="text-xl text-gray-500 xl:text-2xl" />
+              <NavLink to="/cart" className="transition-all duration-200 ease-in-out flex items-center justify-center rounded-full bg-gray-100 w-12 h-12 hover:bg-gray-200">
+                <FaShoppingCart className="text-xl text-gray-500 " />
               </NavLink>
               <div className="relative" ref={profileRef}>
                 <button
                   onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                  className="flex items-center justify-center rounded-full bg-gray-100 w-10 h-10 hover:bg-gray-200 xl:w-14 xl:h-14 xl:p-4 transition-all duration-200 ease-in-out"
+                  className="flex items-center justify-center rounded-full bg-gray-100 w-12 h-12 hover:bg-gray-200 transition-all duration-200 ease-in-out"
                 >
-                  <FaUser className="cursor-pointer text-xl text-gray-500 xl:text-2xl" />
+                  <FaUser className="cursor-pointer text-xl text-gray-500" />
                 </button>
                 {showProfileDropdown && (
                   <div className="absolute right-0 top-14 w-64 rounded-xl bg-white shadow-xl border border-gray-200 overflow-hidden z-50">

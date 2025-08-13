@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div className='text-white font-thin w-100% overflow-x-hidden min-h-screen bg-white flex flex-col'>
       <Nav/>
-      <div className="flex-1 pt-[100px] px-[18px] min-h-full">
+      <div className="flex-1 pt-[70px] px-[18px] mx-auto ">
         <Mainroutes />
       </div>
       <Footer/>
