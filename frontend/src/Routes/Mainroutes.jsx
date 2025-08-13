@@ -14,6 +14,7 @@ import Fashion from "../pages/users/Fashion"
 import Groceries from "../pages/users/Groceries"
 import Sports from "../pages/users/Sports"
 import Beauty from "../pages/users/Beauty"
+import Homeappli from "../pages/users/Homeappli"
 
 const Mainroutes = () => {
   const user = useSelector(state => state.userReducer?.data);
@@ -40,6 +41,7 @@ const Mainroutes = () => {
           <Route path="/fashion" element={<Fashion/>}/>
           <Route path="/groceries" element={<Groceries/>}/>
           <Route path="/sports" element={<Sports/>}/>
+          <Route path="/homeappli" element={<Homeappli/>}/>
         </>
       )}
 

@@ -13,7 +13,13 @@ const Card = ({product}) => {
         </div>
 
       <div className="flex flex-row justify-between px-4 mb-[3%]">
-        <h1 className="p-2 font-normal text-sm rounded-4xl bg-gray-200">{(product.brand)?"":""}</h1>
+        <h1
+          className={`p-2 font-normal text-sm rounded-4xl bg-gray-200 ${
+            product.brand ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {product.brand || "Brand"} {/* optional placeholder */}
+        </h1>
         <h1 className="flex flex-row gap-1 items-center font-semibold">
           <span className="text-yellow-500"><FaStar /></span> {product.rating}
         </h1>
