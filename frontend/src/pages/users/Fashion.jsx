@@ -13,16 +13,17 @@ const Fashion = () => {
     const fashionProducts = [...products]
       .filter((p) => ["mens-shirts", "womens-dresses", "mens-shoes", "womens-shoes", "womens-watches", "mens-watches", "sunglasses", "womens-jewellery", "womens-bags"].includes(p.category?.trim().toLowerCase()))
       .filter((p) => {
-        const min = minPrice ? parseFloat(minPrice) : 0;
-        const max = maxPrice ? parseFloat(maxPrice) : Infinity;
-        return p.price >= min && p.price <= max;
-      })
+      const min = minPrice !== "" ? parseFloat(minPrice) : 0;
+      const max = maxPrice !== "" ? parseFloat(maxPrice) : Infinity;
+      const priceInINR = p.price * 87; // USD → INR conversion example
+      return priceInINR >= min && priceInINR <= max;
+    })
       .sort((a, b) => {
         if (sortType === "price-asc") return a.price - b.price;
         if (sortType === "price-desc") return b.price - a.price;
         if (sortType === "rating") return b.rating - a.rating;
         if (sortType === "name") return a.title.localeCompare(b.title);
-        return 0; // default: no sorting
+        return (0); // default: no sorting
       });
 
     return (

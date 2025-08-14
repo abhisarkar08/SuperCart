@@ -12,9 +12,10 @@ const Homeappli = () => {
     const homeappliProducts = [...products]
       .filter((p) => p.category === "home-decoration" || p.category === "furniture" || p.category === "kitchen-accessories")
       .filter((p) => {
-        const min = minPrice ? parseFloat(minPrice) : 0;
-        const max = maxPrice ? parseFloat(maxPrice) : Infinity;
-        return p.price >= min && p.price <= max;
+        const min = minPrice !== "" ? parseFloat(minPrice) : 0;
+        const max = maxPrice !== "" ? parseFloat(maxPrice) : Infinity;
+        const priceInINR = p.price * 87; // USD → INR conversion example
+        return priceInINR >= min && priceInINR <= max;
       })
       .sort((a, b) => {
         if (sortType === "price-asc") return a.price - b.price;
