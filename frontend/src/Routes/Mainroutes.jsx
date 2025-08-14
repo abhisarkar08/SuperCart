@@ -16,6 +16,7 @@ import Sports from "../pages/users/Sports"
 import Beauty from "../pages/users/Beauty"
 import Homeappli from "../pages/users/Homeappli"
 import SingleCard from "../components/SingleCard";
+import Checkout from "../components/Checkout";
 
 const Mainroutes = () => {
   const user = useSelector(state => state.userReducer?.data);
@@ -44,6 +45,7 @@ const Mainroutes = () => {
           <Route path="/sports" element={<Sports/>}/>
           <Route path="/homeappli" element={<Homeappli/>}/>
           <Route path="/singleCard/:id" element={<SingleCard/>}/>
+          <Route path="/checkout/:id" element={<Checkout/>}/>
         </>
       )}
 
