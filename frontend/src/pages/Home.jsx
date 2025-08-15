@@ -1,4 +1,4 @@
-import { AiOutlineThunderbolt } from 'react-icons/ai';
+import { AiOutlineThunderbolt, AiOutlineSafety, AiOutlineWallet, AiOutlineCustomerService } from 'react-icons/ai';
 import { FiArrowRight } from 'react-icons/fi';
 import { useNavigate } from "react-router-dom";
 import { 
@@ -11,6 +11,10 @@ import {
 } from "react-icons/lu";
 import { useRef } from "react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { HiOutlineRefresh, HiOutlineBadgeCheck, HiOutlineTrendingUp } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import Card from "../components/Card";
+import { useLocation } from "react-router-dom";
 
 
 const Home = () => {
@@ -24,6 +28,39 @@ const Home = () => {
   const scrollRight = () => {
     sliderRef.current.scrollBy({ left: 300, behavior: "smooth" });
   };
+  const location = useLocation();
+  const products = useSelector((state) => state.productReducer.products);
+  const category = location.state?.fromCategory || null;
+
+  let featuredProducts = [...products];
+
+  if (category) {
+    // Filter by category
+    const categoryMap = {
+      beauty: ["beauty", "fragrances"],
+      fashion: ["mens-shirts", "womens-dresses", "womens-shoes", "mens-shoes","womens-watches", "mens-watches", "sunglasses", "womens-jewellery", "womens-bags"],
+      electronics: ["smartphones", "laptops", "tablets"],
+      sports: ["sports-accessories"],
+      groceries: ["groceries"],
+      homeappli: ["home-decoration", "furniture", "kitchen-accessories"]
+    };
+    const allowedCategories = categoryMap[category] || [category];
+    featuredProducts = featuredProducts.filter(p =>
+      allowedCategories.includes(p.category.toLowerCase())
+    );
+  }
+  featuredProducts = featuredProducts.sort(() => 0.5 - Math.random());
+  featuredProducts = featuredProducts.slice(0, 8);
+  
+  const specialProducts = [...products]
+    .sort((a, b) => (b.discountPercentage || 0) - (a.discountPercentage || 0))
+    .slice(0, 4);
+
+  const topProducts = [...products]
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .slice(0, 8);
+
+
   return (
     <div>
       <section className='bg-black w-screen -mx-[18px] -mt-[5px]'>
@@ -62,6 +99,44 @@ const Home = () => {
               <h1 className='font-semibold text-3xl'>24/7</h1>
               <h1 className='font-normal opacity-60'>Support</h1>
             </div>
+          </div>
+        </div>
+      </section>
+      <section className='hidden md:flex flex-col w-screen -mx-[18px] text-black'>
+        <div className='flex flex-col pt-[3rem] text-center mx-auto max-w-[768px] lg:max-w-[1024px] xl:max-w-[1400px]'>
+          <h1 className='text-[2.2rem] mb-2 font-bold'>Why Shop With SuperCart?</h1>
+          <h1 className='px-22 lg:px-[8%] text-[1rem] font-normal opacity-70'>Experience premium shopping with trusted quality, best prices, and 24/7 support — all in one place.</h1>
+        </div>
+        <div className='grid grid-cols-2 gap-4 mt-[4rem] mx-auto mb-[5rem] max-w-[768px] lg:max-w-[1024px] lg:grid-cols-3 lg:max-w-[1400px] xl:grid-cols-6'>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineSafety/></div>
+            <h1 className='text-[1.1rem] font-medium'>Secure Shopping</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>100% secure payment with SSL encryption</h1>
+          </div>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineWallet/></div>
+            <h1 className='text-[1.1rem] font-medium'>Flexible Payments</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>Multiple payment options for your convenience</h1>
+          </div>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineRefresh/></div>
+            <h1 className='text-[1.1rem] font-medium'>Easy Returns</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>30-day hassle-free return policy</h1>
+          </div>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineBadgeCheck/></div>
+            <h1 className='text-[1.1rem] font-medium'>Quality Guarantee</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>Authentic products from trusted brands</h1>
+          </div>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineCustomerService/></div>
+            <h1 className='text-[1.1rem] font-medium'>24/7 Support</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>Round-the-clock customer service</h1>
+          </div>
+          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+            <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineTrendingUp/></div>
+            <h1 className='text-[1.1rem] font-medium'>Best Prices</h1>
+            <h1 className='text-[1rem] font-normal opacity-50'>Competitive prices and daily deals</h1>
           </div>
         </div>
       </section>
@@ -115,6 +190,39 @@ const Home = () => {
           >
             <MdChevronRight size={24} />
           </button>
+        </div>
+      </section>
+      <section className='w-screen -mx-[18px] text-black w-screen pt-[3.8rem]'>
+        <div className='flex flex-col mx-auto gap-4 text-center sm:max-w-[736px] lg:max-w-[992px] xl:max-w-[1282px]'>
+          <h1 className='text-[2.2rem] font-semibold leading-[2.5rem] px-8 items-center flex mx-auto'>Feature Products</h1>
+          <h1 className='text-[1.2rem] max-w-[611px] mx-auto opacity-80 font-normal px-12'>Discover our handpicked selection of top-rated products with amazing deals</h1>
+        </div>
+        <div className="grid grid-cols-1 mt-[2.5rem] px-5 mx-auto max-w-[1536px] md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {featuredProducts.map(product => (
+            <Card key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+      <section className='w-screen -mx-[18px] text-black pt-[3.8rem] px-5'>
+        <div className='flex flex-col gap-1 mx-auto max-w-[1536px]'>
+          <h1 className='text-[2.2rem] font-semibold'>Special Offers</h1>
+          <h1 className='text-[1.2rem] opacity-80 font-normal'>Limited time deals you don't want to miss</h1>
+        </div>
+        <div className="grid grid-cols-1 mx-auto max-w-[1536px] md:grid-cols-3 lg:grid-cols-4 gap-6 mt-[2rem]">
+          {specialProducts.map(product => (
+            <Card key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+      <section className='w-screen -mx-[18px] text-black pt-[3.8rem] px-5'>
+        <div className='flex flex-col gap-1 mx-auto max-w-[1536px]'>
+          <h1 className='text-[2.2rem] font-semibold'>Top Rated</h1>
+          <h1 className='text-[1.2rem] opacity-80 font-normal'>Products loved by our customers</h1>
+        </div>
+        <div className="grid grid-cols-1 mx-auto max-w-[1536px] md:grid-cols-2 lg:grid-cols-4 gap-6 mt-[2rem]">
+          {topProducts.map(product => (
+            <Card key={product.id} product={product} />
+          ))}
         </div>
       </section>
     </div>

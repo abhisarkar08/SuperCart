@@ -147,12 +147,12 @@ const Navbar = () => {
       {!isAuthPage && menuOpen && (
         <div className="text-black absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
           <div className="flex flex-col gap-3 font-semibold">
-            <NavLink to="/electronics" className={navLinkClass}>Electronics</NavLink>
-            <NavLink to="/fashion" className={navLinkClass}>Fashion</NavLink>
-            <NavLink to="/groceries" className={navLinkClass}>Groceries</NavLink>
-            <NavLink to="/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
-            <NavLink to="/beauty" className={navLinkClass}>Beauty</NavLink>
-            <NavLink to="/sports" className={navLinkClass}>Sports</NavLink>
+            <NavLink to="/products/electronics" className={navLinkClass}>Electronics</NavLink>
+            <NavLink to="/products/fashion" className={navLinkClass}>Fashion</NavLink>
+            <NavLink to="/products/groceries" className={navLinkClass}>Groceries</NavLink>
+            <NavLink to="/products/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
+            <NavLink to="/products/beauty" className={navLinkClass}>Beauty</NavLink>
+            <NavLink to="/products/sports" className={navLinkClass}>Sports</NavLink>
           </div>
         </div>
       )}
@@ -171,12 +171,12 @@ const Navbar = () => {
         {!isAuthPage && (
           <>
             <div className="flex gap-5 text-sm font-medium text-black  transition-all duration-200 ease-in-out ">
-              <NavLink to="/electronics" className={navLinkClass}>Electronics</NavLink>
-              <NavLink to="/fashion" className={navLinkClass}>Fashion</NavLink>
-              <NavLink to="/groceries" className={navLinkClass}>Groceries</NavLink>
-              <NavLink to="/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
-              <NavLink to="/beauty" className={navLinkClass}>Beauty</NavLink>
-              <NavLink to="/sports" className={navLinkClass}>Sports</NavLink>
+              <NavLink to="/products/electronics" className={navLinkClass}>Electronics</NavLink>
+              <NavLink to="/products/fashion" className={navLinkClass}>Fashion</NavLink>
+              <NavLink to="/products/groceries" className={navLinkClass}>Groceries</NavLink>
+              <NavLink to="/products/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
+              <NavLink to="/products/beauty" className={navLinkClass}>Beauty</NavLink>
+              <NavLink to="/products/sports" className={navLinkClass}>Sports</NavLink>
             </div>
 
             {/* Search Bar */}

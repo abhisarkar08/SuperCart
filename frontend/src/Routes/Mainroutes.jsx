@@ -8,14 +8,9 @@ import Cart from '../pages/admin/Cart'
 import Pagenotfound from '../Pagenotfound'
 import Wishlist from '../pages/admin/Wishlist'
 import Orders from '../pages/admin/Orders'
-import Electronics from "../pages/users/Electronics";
-import Fashion from "../pages/users/Fashion"
-import Groceries from "../pages/users/Groceries"
-import Sports from "../pages/users/Sports"
-import Beauty from "../pages/users/Beauty"
-import Homeappli from "../pages/users/Homeappli"
 import SingleCard from "../components/SingleCard";
 import Checkout from "../components/Checkout";
+import Products from "../pages/users/Products";
 
 const Mainroutes = () => {
   const user = useSelector(state => state.userReducer?.data);
@@ -36,14 +31,9 @@ const Mainroutes = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/wishlist" element={<Wishlist />} />
-          <Route path="/electronics" element={<Electronics/>}/>
-          <Route path="/beauty" element={<Beauty/>}/>
-          <Route path="/fashion" element={<Fashion/>}/>
-          <Route path="/groceries" element={<Groceries/>}/>
-          <Route path="/sports" element={<Sports/>}/>
-          <Route path="/homeappli" element={<Homeappli/>}/>
           <Route path="/singleCard/:id" element={<SingleCard/>}/>
           <Route path="/checkout/:id" element={<Checkout/>}/>
+          <Route path="/products/:category" element={<Products/>}/>
         </>
       )}
 

@@ -73,7 +73,7 @@ const Footer = () => {
                             <div className='w-6 h-6 flex items-center justify-center'>
                                 <FaEnvelope className='text-gray-400 text-sm'/>
                             </div>
-                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>support@pixelcart.com</p>
+                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>support@supercart.com</p>
                         </div>
                         <div className='flex items-start space-x-4'>
                             <div className='w-6 h-6 flex items-center justify-center mt-1'>
