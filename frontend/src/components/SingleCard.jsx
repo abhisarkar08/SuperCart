@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { AiOutlineHeart, AiOutlineSafety, AiOutlineStar, AiOutlineSync, AiOutlineUser, AiOutlineLike } from "react-icons/ai";
+import { AiFillHeart, AiOutlineSafety, AiOutlineStar, AiOutlineSync, AiOutlineUser, AiOutlineLike } from "react-icons/ai";
 import { HiOutlineCube } from "react-icons/hi";
 import { FaStar, FaRegStar, FaStarHalfAlt, FaCircle } from "react-icons/fa";
 import { asyncloadpro } from '../Store/Actions/ProductAction';
@@ -18,6 +18,31 @@ const SingleCard = () => {
   const [isThumbnail, setIsThumbnail] = useState(true);
   const [activeTab, setActiveTab] = useState("description");
   const [quantity, setQuantity] = useState(1);
+  const [like, setLike] = useState(false);
+
+  useEffect(() => {
+  if (!product) return; // product undefined hai toh skip karo
+
+  const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+  const isLiked = wishlist.some(item => item.id === product.id);
+  setLike(isLiked);
+}, [product]);
+
+  const handleLike = () => {
+    const wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+    if (like) {
+      // Agar already like hai toh remove karo
+      const updatedWishlist = wishlist.filter(item => item.id !== product.id);
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      setLike(false);
+    } else {
+      // Nahi hai toh add karo
+      const updatedWishlist = [...wishlist, product];
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      setLike(true);
+    }
+  };
 
   const increment = () => setQuantity(prev => prev + 1);
   const decrement = () => setQuantity(prev => Math.max(1, prev - 1));
@@ -71,7 +96,10 @@ const SingleCard = () => {
               src={mainImage || product.thumbnail}
               alt={product.title}
             />
-            <AiOutlineHeart className="text-shadow-lg cursor-pointer absolute top-3 right-2 w-10 h-10 text-red-300 bg-white rounded-full p-2" />
+            <AiFillHeart 
+              onClick={handleLike}
+              className={`text-shadow-lg cursor-pointer absolute top-3 right-2 w-10 h-10 bg-white rounded-full p-2 ${like ===true? "text-red-500" : "text-blue-300"}`}
+            />  
           </div>
 
           <div className="flex gap-2 flex-row justify-start my-3 mt-5">
