@@ -36,13 +36,6 @@ const Checkout = () => {
   const delii = parseFloat(deli[selected].price.replace("₹", ""))
   const tax = Number(10)
   const total = (sub + delii + tax)
-  console.log("Raw price:", product?.price);
-console.log("Converted price:", Number(product?.price));
-console.log(typeof sub, sub);
-console.log(typeof delii, delii);
-console.log(typeof tax, tax);
-console.log(typeof total, total);
-
 
   
   const ordersubmit = (data) => {
@@ -54,14 +47,14 @@ console.log(typeof total, total);
       quantity: qty,
       price: product.price,
       delivery: deli[selected]?.name || "Standard Delivery",
-    total: total,
-    date: new Date().toISOString()
+      total: total,
+      date: new Date().toISOString()
     };
 
     localStorage.setItem("orders", JSON.stringify([...orders, orderData]));
     toast.success("Order is placed!! ✅");
 
-    reset(); // 👈 sab input reset ho jayenge
+    reset(); 
   };
 
 

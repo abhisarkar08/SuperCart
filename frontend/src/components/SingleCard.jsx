@@ -7,12 +7,14 @@ import { asyncloadpro } from '../Store/Actions/ProductAction';
 import { useEffect, useState } from "react";
 import { FiThumbsUp } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
+import { addToCart } from "../Store/Reducers/CartSlice";
 
 const SingleCard = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.productReducer.products);
   const product = products?.find((p) => p.id == id);
+  const user = useSelector((state) => state.userReducer.user);
 
   const [mainImage, setMainImage] = useState(product?.images?.[0]);
   const [isThumbnail, setIsThumbnail] = useState(true);
@@ -85,6 +87,18 @@ const SingleCard = () => {
   }, {});
 
   const totalReviews = Object.values(ratingCounts).reduce((a, b) => a + b, 0);
+  const handleAddToCart = async () => {
+    const cartItem = {
+      id: product.id,
+      title: product.title,
+      price: (product.price * 87).toFixed(2),
+      image: product.thumbnail,
+      quantity,
+    };
+    dispatch(addToCart(cartItem));
+  }
+
+  
 
   return (
     <div className="mx-1 flex flex-col gap-0 text-black mt-5">
@@ -152,7 +166,7 @@ const SingleCard = () => {
             </div>
             </h1>
             <div className="flex flex-col sm:flex-row gap-2">
-              <button className="flex-1 cursor-pointer bg-black text-white p-2 text-lg font-normal rounded-lg ">Add to Cart</button>
+              <button onClick={handleAddToCart} className="flex-1 cursor-pointer bg-black text-white p-2 text-lg font-normal rounded-lg ">Add to Cart</button>
               <button onClick={() => navig(`/checkout/${product.id}`, { state: { quantity } })} className="flex-1 cursor-pointer text-lg p-2 rounded-lg font-semibold border border-gray-400">Buy Now</button>
             </div>
             <hr className="mt-4"/>
