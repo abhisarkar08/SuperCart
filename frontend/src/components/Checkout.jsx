@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { HiArrowLeft, HiDocumentText } from 'react-icons/hi';
 import { useState } from "react";
 import { FaTruck, FaHome, FaLeaf, FaCheckCircle, FaMapMarkerAlt, FaPencilAlt, FaWallet  } from 'react-icons/fa';
@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 
 const Checkout = () => {
   const navig = useNavigate();
+  const location = useLocation();
+  const qty = location.state?.quantity || 1;
   const { register, handleSubmit,setValue, reset, formState: { errors } } = useForm();
   const [selected, setSelected] = useState(0);
   const [cards, setcards] = useState(0);
@@ -30,12 +32,17 @@ const Checkout = () => {
     { name: "UPI", img: "https://upload.wikimedia.org/wikipedia/commons/e/e1/UPI-Logo-vector.svg" },
   ];
 
-  const sub = Number(product?.price || 0) * 87
+  const sub = Number(((Number(product?.price || 0) * 87) * qty).toFixed(2));
   const delii = parseFloat(deli[selected].price.replace("₹", ""))
-  const tax = 10
-  const total = sub + delii + tax
+  const tax = Number(10)
+  const total = (sub + delii + tax)
   console.log("Raw price:", product?.price);
 console.log("Converted price:", Number(product?.price));
+console.log(typeof sub, sub);
+console.log(typeof delii, delii);
+console.log(typeof tax, tax);
+console.log(typeof total, total);
+
 
   
   const ordersubmit = (data) => {
@@ -44,6 +51,7 @@ console.log("Converted price:", Number(product?.price));
     const orderData = {
       id: product.id,
       name: product.title || product.name,
+      quantity: qty,
       price: product.price,
       delivery: deli[selected]?.name || "Standard Delivery",
     total: total,
@@ -88,7 +96,7 @@ console.log("Converted price:", Number(product?.price));
           <div className='flex flex-col gap-2.5 text-sm my-2'>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Subtotal</h1>
-              <p>₹{(product?.price || 0)*87}</p>
+              <p>₹{(((product?.price || 0)*87)*qty).toFixed(2)}</p>
             </div>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Delivery</h1>
@@ -102,7 +110,7 @@ console.log("Converted price:", Number(product?.price));
           <hr className='border-gray-400 opacity-50'/>
           <div className='flex flex-row justify-between my-2 text-lg font-medium'>
             <h1>Total</h1>
-            <h1>₹{total}</h1>
+            <h1>₹{total.toFixed(2)}</h1>
           </div>
           <div className='flex flex-row gap-3 justify-center'>
             <input

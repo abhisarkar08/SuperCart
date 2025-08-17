@@ -153,7 +153,7 @@ const SingleCard = () => {
             </h1>
             <div className="flex flex-col sm:flex-row gap-2">
               <button className="flex-1 cursor-pointer bg-black text-white p-2 text-lg font-normal rounded-lg ">Add to Cart</button>
-              <button onClick={() => navig(`/checkout/${product.id}`)} className="flex-1 cursor-pointer text-lg p-2 rounded-lg font-semibold border border-gray-400">Buy Now</button>
+              <button onClick={() => navig(`/checkout/${product.id}`, { state: { quantity } })} className="flex-1 cursor-pointer text-lg p-2 rounded-lg font-semibold border border-gray-400">Buy Now</button>
             </div>
             <hr className="mt-4"/>
             <div className="flex flex-col  gap-4 mt-5 sm:flex-row">
