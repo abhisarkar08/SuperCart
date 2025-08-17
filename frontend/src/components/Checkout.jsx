@@ -17,6 +17,10 @@ const Checkout = () => {
   const products = useSelector((state) => state.productReducer.products);
   const users = useSelector(state => state.userReducer?.data);
   const product = products?.find((p) => p.id == Number(id));
+  const cartState = location.state;
+const cartItems = cartState?.cartItems || [];
+const cartTax = cartState?.tax || 0;
+const cartTotal = cartState?.grandTotal || 0;
 
   const deli = [
     {name: "Fast Delivery", price:'₹30',des: "Within 6 Hours", icon:<FaTruck color="gray"/>},
@@ -89,7 +93,7 @@ const Checkout = () => {
           <div className='flex flex-col gap-2.5 text-sm my-2'>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Subtotal</h1>
-              <p>₹{(((product?.price || 0)*87)*qty).toFixed(2)}</p>
+              <p>₹{cartItems.length ? cartState.total.toFixed(2) : (((product?.price || 0) * 87) * qty).toFixed(2)}</p>
             </div>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Delivery</h1>
@@ -97,13 +101,17 @@ const Checkout = () => {
             </div>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Tax</h1>
-              <p>₹{tax}</p>
+              <p>₹{cartItems.length ? cartState.tax : tax}</p>
             </div>
           </div>
           <hr className='border-gray-400 opacity-50'/>
           <div className='flex flex-row justify-between my-2 text-lg font-medium'>
             <h1>Total</h1>
-            <h1>₹{total.toFixed(2)}</h1>
+            <h1>₹{
+    cartItems.length 
+      ? (cartState.total + cartState.tax + parseFloat(deli[selected].price.replace("₹",""))).toFixed(2)  // Cart checkout
+      : (((product?.price || 0) * 87) * qty + tax + parseFloat(deli[selected].price.replace("₹",""))).toFixed(2) // Single product checkout
+  }</h1>
           </div>
           <div className='flex flex-row gap-3 justify-center'>
             <input

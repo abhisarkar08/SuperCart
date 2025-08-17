@@ -2,7 +2,19 @@ import { IoFlashOutline } from "react-icons/io5"
 import { LuShoppingCart } from "react-icons/lu";
 import { FaStar } from "react-icons/fa"
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../Store/Reducers/CartSlice"; 
 const Card = ({product}) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (e) => {
+    e.preventDefault(); 
+    dispatch(addToCart({
+      ...product,
+      price: (product.price * 87).toFixed(2),  // 👈 yahan convert karke bhej do
+    }));
+  };
+
   return (
     <Link to={`/singleCard/${product.id}`} className="block">
       <div className="mx-auto max-w-[608px] md:max-w-[348px] text-black shadow-lg rounded-xl mb-[15%] hover:translate-y-[-8px] hover:shadow-2xl transition-transform duration-400 group" key={product.id}>
@@ -41,7 +53,7 @@ const Card = ({product}) => {
 
         <div className="flex flex-row justify-between items-center font-semibold p-3 gap-1">
           <h1 className="text-2xl sm:text-3xl md:text-2xl lg:text-xl xl:text-2xl">₹{((product.price)*87).toFixed(2)}</h1>
-          <button className="flex cursor-pointer flex-row gap-1 bg-black text-white rounded-lg active-97 px-3 py-2 text-md items-center sm:text-lg md:text-base lg:p-1 lg:whitespace-nowrap lg:text-sm xl:px-3 xl:text-base xl:py-1">
+          <button onClick={handleAddToCart} className="flex cursor-pointer flex-row gap-1 bg-black text-white rounded-lg active-97 px-3 py-2 text-md items-center sm:text-lg md:text-base lg:p-1 lg:whitespace-nowrap lg:text-sm xl:px-3 xl:text-base xl:py-1">
             <span><LuShoppingCart /></span> Add to Cart
           </button>
         </div>

@@ -33,6 +33,7 @@ const Mainroutes = () => {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/singleCard/:id" element={<SingleCard/>}/>
           <Route path="/checkout/:id" element={<Checkout/>}/>
+          <Route path="/checkout" element={<Checkout />} />  
           <Route path="/products/:category" element={<Products/>}/>
         </>
       )}

@@ -52,6 +52,26 @@ const Cart = () => {
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+  const tax = cartItems.reduce(
+    (acc, item) => acc + (10 * item.quantity),
+    0
+  );
+  const total = subTotal + tax
+
+  const handleCartCheckout = (items) => {
+    const total = items.reduce((acc, i) => acc + (i.price * 87) * i.quantity, 0);
+    const tax = items.reduce((acc, i) => acc + (10 * i.quantity), 0);
+    const grandTotal = total + tax;
+
+    navig("/checkout", {
+      state: {
+        cartItems: items,
+        total,
+        tax,
+        grandTotal,
+      },
+    });
+  };
 
   if (cartItems.length === 0) {
     // 👇 tumhara same layout empty cart ke liye
@@ -88,9 +108,9 @@ const Cart = () => {
 
   // 👇 Agar cart me items hain
   return (
-    <div className="min-h-screen  bg-gray-200 text-black w-screen pt-5 -mx-[18px] px-5 text-black">
+    <div className="min-h-screen  bg-[#FEFFFF] text-black w-screen pt-5 -mx-[18px] px-5 text-black">
       <div className='flex flex-col gap-4 mb-[4rem] max-w-[1280px] mx-auto'>
-        <div><button onClick={() => navig('/cart')} className='flex flex-row items-center gap-2 hover:bg-gray-200 transition-colors duration-200 p-1.5 cursor-pointer rounded-xl text-lg font-normal'><HiArrowLeft/>Back to Cart</button></div>
+        <div><button onClick={() => navig(-1)} className='flex flex-row items-center gap-2 hover:bg-gray-200 transition-colors duration-200 p-1.5 cursor-pointer rounded-xl text-lg font-normal'><HiArrowLeft/>Back</button></div>
         <div className='flex flex-col gap-0.5'>
           <h1 className='text-3xl font-semibold'>Cart</h1>
           <h1 className='text-base font-normal opacity-70'>Complete your purchase securely</h1>
@@ -106,17 +126,17 @@ const Cart = () => {
           <div className='flex flex-col gap-2.5 text-sm my-2'>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Subtotal</h1>
-              <p>₹total</p>
+              <p>₹{subTotal}</p>
             </div>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Tax</h1>
-              <p>₹140</p>
+              <p>₹{tax}</p>
             </div>
           </div>
           <hr className='border-gray-400 opacity-50'/>
           <div className='flex flex-row justify-between my-2 text-lg font-medium'>
             <h1>Total</h1>
-            <h1>₹ {subTotal.toFixed(2)}</h1>
+            <h1>₹ {total.toFixed(2)}</h1>
           </div>
           <div className='flex flex-row gap-3 justify-center'>
             <input
@@ -127,11 +147,11 @@ const Cart = () => {
         </div>
 
         <div className='max-w-[958px] lg:max-w-[842px] w-full'>
-          <div className="flex flex-row justify-between px-[3rem]">
+          <div className="flex flex-row justify-between sm:px-[3rem] px-2 text-sm sm:text-base font-normal opacity-70">
             <div>
               <h1>Product</h1>
             </div>
-            <div className="flex flex-row gap-15">
+            <div className="flex flex-row gap-3 sm:gap-15">
                <h1>Price</h1>
                <h1>Quantity</h1>
                <h1>Total</h1>
@@ -140,43 +160,43 @@ const Cart = () => {
           {cartItems.map((item) => (
               <div
                 key={item.id}
-                className="flex flex-row justify-between bg-red-200 items-center gap-4 border-b py-2"
+                className="relative flex flex-row justify-between items-center gap-4 border-b border-gray-400 py-2"
               >
                 <div className="flex flex-row items-center">
                   <img
-                    src={item.image}
+                    src={item.image || item.thumbnail}
                     alt={item.title}
-                    className="w-20 h-20 object-contain"
+                    className="w-12 h-12 sm:w-22 sm:h-22 object-contain"
                   />
-                  <h2 className="font-semibold">{item.title}</h2>
+                  <h2 className="text-sm font-normal sm:font-medium sm:text-lg">{item.title}</h2>
                 </div>
-                <div className="flex flex-row">
-                  <div className="flex flex-row gap-19 pr-4">
+                <div className="flex flex-row items-center">
+                  <div className="flex flex-row gap-5 sm:gap-19 sm:pr-4 text-xs sm:text-base font-normal">
                     <p>
-                      ₹ {item.price}
+                      ₹{item.price}
                     </p>
                     <p>{item.quantity}</p>
-                    <p>{subTotal.toFixed(2)}</p>
+                    <p>₹{(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                   <button
                     onClick={() => dispatch(removeFromCart(item.id))}
-                    className="text-red-500 font-semibold text-3xl"
+                    className="text-red-500 absolute -right-3 sm:static cursor-pointer font-semibold sm:text-3xl"
                   >
                     ×
                   </button>
                 </div>
               </div>
             ))}
+            <div className="mt-6 mb-5 flex justify-end">
+              <button
+                onClick={() => handleCartCheckout(cartItems)}
+                className=" bg-black text-white px-3 py-2 rounded-lg font-medium sm:font-semibold"
+              >
+                Proceed to Checkout
+              </button>
+            </div>
         </div>
       </section>
-      <div className="mt-6 flex justify-end">
-        <button
-          onClick={() => navig("/checkout")}
-          className="bg-black text-white px-6 py-2 rounded-lg font-semibold"
-        >
-          Proceed to Checkout
-        </button>
-      </div>
     </div>
   );
 };
