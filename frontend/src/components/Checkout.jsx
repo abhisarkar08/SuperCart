@@ -48,6 +48,7 @@ const cartTotal = cartState?.grandTotal || 0;
     const orderData = {
       id: product.id,
       name: product.title || product.name,
+      image:product.thumbnail,
       quantity: qty,
       price: product.price,
       delivery: deli[selected]?.name || "Standard Delivery",
