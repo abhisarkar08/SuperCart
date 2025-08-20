@@ -5,6 +5,24 @@ import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { asynccurrentuser } from '../Store/Actions/UserAction';
 import { asynclogoutuser, asyncupdateuser } from '../Store/Actions/UserAction';
+import { FiLogOut } from "react-icons/fi";
+// Electronics
+import { FiMonitor } from "react-icons/fi";   // computer monitor
+
+// Fashion
+import { FiShoppingBag } from "react-icons/fi"; // shopping bag
+
+// Grocery
+import { FiShoppingCart } from "react-icons/fi"; // cart for grocery
+
+// Sports
+import { FiActivity } from "react-icons/fi"; // activity/fitness outline
+
+// Home Appliance
+import { FiTv } from "react-icons/fi"; // TV (home appliance)
+
+// Beauty
+import { FiFeather } from "react-icons/fi"; // feather (beauty/softness)
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -147,13 +165,31 @@ const Navbar = () => {
       {!isAuthPage && menuOpen && (
         <div className="text-black absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
           <div className="flex flex-col gap-3 font-semibold">
-            <NavLink to="/products/electronics" className={navLinkClass}>Electronics</NavLink>
-            <NavLink to="/products/fashion" className={navLinkClass}>Fashion</NavLink>
-            <NavLink to="/products/groceries" className={navLinkClass}>Groceries</NavLink>
-            <NavLink to="/products/homeappli" className={navLinkClass}>Home & Appliances</NavLink>
-            <NavLink to="/products/beauty" className={navLinkClass}>Beauty</NavLink>
-            <NavLink to="/products/sports" className={navLinkClass}>Sports</NavLink>
+            <NavLink to="/products/electronics" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiMonitor /> <span>Electronics</span>
+            </NavLink>
+
+            <NavLink to="/products/fashion" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiShoppingBag /> <span>Fashion</span>
+            </NavLink>
+
+            <NavLink to="/products/groceries" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiShoppingCart /> <span>Groceries</span>
+            </NavLink>
+
+            <NavLink to="/products/homeappli" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiTv /> <span>Home & Appliances</span>
+            </NavLink>
+
+            <NavLink to="/products/beauty" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiFeather /> <span>Beauty</span>
+            </NavLink>
+
+            <NavLink to="/products/sports" className={`${navLinkClass} flex items-center gap-2`}>
+              <FiActivity /> <span>Sports</span>
+            </NavLink>
           </div>
+
         </div>
       )}
 
@@ -254,7 +290,7 @@ const Navbar = () => {
                         }}
                         className="cursor-pointer flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
                       >
-                        <span>↲</span> Logout
+                        <span><FiLogOut/></span> Logout
                       </button>
                     ) : null}
                   </div>

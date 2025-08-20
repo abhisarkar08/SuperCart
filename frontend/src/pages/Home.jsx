@@ -162,40 +162,86 @@ const Home = () => {
       </section>
       <section className='hidden md:flex flex-col w-screen -mx-[18px] text-black'>
         <div className='flex flex-col pt-[3rem] text-center mx-auto max-w-[768px] lg:max-w-[1024px] xl:max-w-[1400px]'>
-          <h1 className='text-[2.2rem] mb-2 font-bold'>Why Shop With SuperCart?</h1>
-          <h1 className='px-22 lg:px-[8%] text-[1rem] font-normal opacity-70'>Experience premium shopping with trusted quality, best prices, and 24/7 support — all in one place.</h1>
+          <motion.h1
+            className='text-[2.2rem] mb-2 font-bold'
+            initial={{opacity:0, y:30}}
+            animate={{opacity:1, y:0}}
+            transition={{duration:0.8, delay:0.5}}
+          >
+            Why Shop With SuperCart?
+          </motion.h1>
+          <motion.h1
+           className='px-22 lg:px-[8%] text-[1rem] font-normal opacity-70'
+           initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:0.8}}
+           
+          >
+            Experience premium shopping with trusted quality, best prices, and 24/7 support — all in one place.
+          </motion.h1>
         </div>
         <div className='grid grid-cols-2 gap-4 mt-[4rem] mx-auto mb-[5rem] max-w-[768px] lg:max-w-[1024px] lg:grid-cols-3 lg:max-w-[1400px] xl:grid-cols-6'>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          <motion.div
+           className='flex flex-col items-center gap-2 p-2 text-center group'
+           initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:0.9}}
+          >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineSafety/></div>
             <h1 className='text-[1.1rem] font-medium'>Secure Shopping</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>100% secure payment with SSL encryption</h1>
-          </div>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          </motion.div>
+          <motion.div 
+            className='flex flex-col items-center gap-2 p-2 text-center group'
+            initial={{opacity:0, y:30}}
+            animate={{opacity:1, y:0}}
+            transition={{duration:0.8, delay:1}}
+          >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineWallet/></div>
             <h1 className='text-[1.1rem] font-medium'>Flexible Payments</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>Multiple payment options for your convenience</h1>
-          </div>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          </motion.div>
+          <motion.div
+           className='flex flex-col items-center gap-2 p-2 text-center group'
+           initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:1.1}}
+           >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineRefresh/></div>
             <h1 className='text-[1.1rem] font-medium'>Easy Returns</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>30-day hassle-free return policy</h1>
-          </div>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          </motion.div>
+          <motion.div
+           className='flex flex-col items-center gap-2 p-2 text-center group'
+           initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:1.2}}
+           >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineBadgeCheck/></div>
             <h1 className='text-[1.1rem] font-medium'>Quality Guarantee</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>Authentic products from trusted brands</h1>
-          </div>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          </motion.div>
+          <motion.div 
+          className='flex flex-col items-center gap-2 p-2 text-center group'
+          initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:1.3}}
+          >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineCustomerService/></div>
             <h1 className='text-[1.1rem] font-medium'>24/7 Support</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>Round-the-clock customer service</h1>
-          </div>
-          <div className='flex flex-col items-center gap-2 p-2 text-center group'>
+          </motion.div>
+          <motion.div
+           className='flex flex-col items-center gap-2 p-2 text-center group'
+           initial={{opacity:0, y:30}}
+           animate={{opacity:1, y:0}}
+           transition={{duration:0.8, delay:1.4}}
+           
+           >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><HiOutlineTrendingUp/></div>
             <h1 className='text-[1.1rem] font-medium'>Best Prices</h1>
             <h1 className='text-[1rem] font-normal opacity-50'>Competitive prices and daily deals</h1>
-          </div>
+          </motion.div>
         </div>
       </section>
       <section className='w-screen bg-gray-100 -mx-[18px] text-black'>
