@@ -59,7 +59,7 @@ const Cart = () => {
   const total = subTotal + tax
 
   const handleCartCheckout = (items) => {
-    const total = items.reduce((acc, i) => acc + (i.price * 87) * i.quantity, 0);
+    const total = items.reduce((acc, i) => acc + (i.price) * i.quantity, 0);
     const tax = items.reduce((acc, i) => acc + (10 * i.quantity), 0);
     const grandTotal = total + tax;
 

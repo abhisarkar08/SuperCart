@@ -18,9 +18,9 @@ const Checkout = () => {
   const users = useSelector(state => state.userReducer?.data);
   const product = products?.find((p) => p.id == Number(id));
   const cartState = location.state;
-const cartItems = cartState?.cartItems || [];
-const cartTax = cartState?.tax || 0;
-const cartTotal = cartState?.grandTotal || 0;
+  const cartItems = cartState?.cartItems || [];
+  const cartTax = cartState?.tax || 0;
+  const cartTotal = cartState?.grandTotal || 0;
 
   const deli = [
     {name: "Fast Delivery", price:'₹30',des: "Within 6 Hours", icon:<FaTruck color="gray"/>},
@@ -43,24 +43,42 @@ const cartTotal = cartState?.grandTotal || 0;
 
   
   const ordersubmit = (data) => {
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
 
-    const orderData = {
+  let newOrders = [];
+
+  if (cartItems && cartItems.length > 0) {
+    // Cart se checkout
+    newOrders = cartItems.map((item) => ({
+      id: item.id,
+      name: item.title || item.name,
+      image: item.thumbnail || item.image,
+      quantity: item.quantity,
+      price: item.price,
+      delivery: deli[selected]?.name || "Standard Delivery",
+      total: total,   // total INR me jo tum state se pass kar rahe ho
+      date: new Date().toISOString()
+    }));
+  } else if (product) {
+    // Single product checkout
+    newOrders = [{
       id: product.id,
       name: product.title || product.name,
-      image:product.thumbnail,
+      image: product.thumbnail || product.image,
       quantity: qty,
       price: product.price,
       delivery: deli[selected]?.name || "Standard Delivery",
       total: total,
       date: new Date().toISOString()
-    };
+    }];
+  }
 
-    localStorage.setItem("orders", JSON.stringify([...orders, orderData]));
-    toast.success("Order is placed!! ✅");
+  localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
+  toast.success("Order is placed!! ✅");
 
-    reset(); 
-  };
+  reset();
+};
+
 
 
   const useradd = () =>{
@@ -94,7 +112,11 @@ const cartTotal = cartState?.grandTotal || 0;
           <div className='flex flex-col gap-2.5 text-sm my-2'>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Subtotal</h1>
-              <p>₹{cartItems.length ? cartState.total.toFixed(2) : (((product?.price || 0) * 87) * qty).toFixed(2)}</p>
+              <p>₹{cartItems.length > 0 
+                    ? cartState.total.toFixed(2)   // cart se aaya toh INR already hai
+                    : ((Number(product?.price || 0) * 87) * qty).toFixed(2)  // single product ko INR me convert karo
+                  }
+              </p>
             </div>
             <div className='flex flex-row justify-between font-semibold'>
               <h1 className='opacity-40 font-normal'>Delivery</h1>
@@ -295,7 +317,7 @@ const cartTotal = cartState?.grandTotal || 0;
               ): null}
               <div className="flex justify-end">
                 <button type="submit" className="bg-black text-white p-2 mt-[1rem] font-normal cursor-pointer rounded-lg text-sm">
-                  Pay with GPay
+                  Pay with {cards !== null ? methods[cards].name : "GPay"}
                 </button>
               </div>
             </div>

@@ -49,16 +49,15 @@ const Orders = () => {
               <div className="flex justify-between items-center border-b pb-2">
                 <div className="flex items-center gap-3">
                   <img
-                    src={order.image}
+                    src={order.image || order.thumbnail}
                     alt={order.name}
                     className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
                   />
                   <h3 className="text-sm sm:text-base font-medium">{order.name}</h3>
                 </div>
                 <div className="flex gap-4 text-xs sm:text-base">
-                  <p>₹{order.price}</p>
-                  <p>x{order.quantity}</p>
-                  <p className="font-semibold">₹{(order.price * order.quantity).toFixed(2)}</p>
+                  <p>. qty. {order.quantity}</p>
+                  <p className="font-semibold">₹{(((order.price)*87)   * order.quantity).toFixed(2)}</p>
                 </div>
               </div>
 
