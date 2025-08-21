@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { FiThumbsUp } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../Store/Reducers/CartSlice";
+import { addToCartBackend } from '../Store/Actions/CartAction';
 
 const SingleCard = () => {
   const { id } = useParams();
@@ -95,10 +96,12 @@ const SingleCard = () => {
       image: product.thumbnail,
       quantity,
     };
-    dispatch(addToCart(cartItem));
-  }
-
   
+    dispatch(addToCart(cartItem));   // Redux
+    if(user?.id){
+      await addToCartBackend(product, user.id, quantity); // Backend
+    }
+  };
 
   return (
     <div className="mx-1 flex flex-col gap-0 text-black mt-5">
@@ -167,7 +170,7 @@ const SingleCard = () => {
             </h1>
             <div className="flex flex-col sm:flex-row gap-2">
               <button onClick={handleAddToCart} className="flex-1 cursor-pointer bg-black text-white p-2 text-lg font-normal rounded-lg ">Add to Cart</button>
-              <button onClick={() => navig(`/checkout/${product.id}`, { state: { quantity } })} className="flex-1 cursor-pointer text-lg p-2 rounded-lg font-semibold border border-gray-400">Buy Now</button>
+              <button onClick={() => navig(`/checkout/${product.id}`, { state: { quantity, isDirectBuy: true } })} className="flex-1 cursor-pointer text-lg p-2 rounded-lg font-semibold border border-gray-400">Buy Now</button>
             </div>
             <hr className="mt-4"/>
             <div className="flex flex-col  gap-4 mt-5 sm:flex-row">

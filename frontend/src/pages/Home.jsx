@@ -166,16 +166,16 @@ const Home = () => {
             className='text-[2.2rem] mb-2 font-bold'
             initial={{opacity:0, y:30}}
             animate={{opacity:1, y:0}}
-
+            viewport={{ once: true, amount: 0.2 }} 
             transition={{duration:0.8, delay:0.5}}
           >
             Why Shop With SuperCart?
           </motion.h1>
           <motion.h1
-           className='px-22 lg:px-[8%] text-[1rem] font-normal opacity-70'
+           className='px-22 lg:px-[8%] text-[1rem] font-normal '
            initial={{opacity:0, y:30}}
            animate={{opacity:1, y:0}}
-           transition={{duration:0.8, delay:0.8}}
+           transition={{duration:1, delay:0.8}}
            
           >
             Experience premium shopping with trusted quality, best prices, and 24/7 support — all in one place.

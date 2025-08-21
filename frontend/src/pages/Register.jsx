@@ -71,7 +71,7 @@ const Register = () => {
         <div className='px-4'>
           <button
             type="submit"
-            className="active:scale-97 mt-4 rounded-xl bg-black px-4 w-full py-2 text-white font-bold sm:text-lg lg:text-xl"
+            className="active:scale-97 cursor-pointer mt-4 rounded-xl bg-black px-4 w-full py-2 text-white font-bold sm:text-lg lg:text-xl"
           >
             Register
           </button>

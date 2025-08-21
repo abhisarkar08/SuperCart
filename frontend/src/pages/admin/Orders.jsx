@@ -57,14 +57,25 @@ const Orders = () => {
                 </div>
                 <div className="flex gap-4 text-xs sm:text-base">
                   <p>. qty. {order.quantity}</p>
-                  <p className="font-semibold">₹{(((order.price)*87)   * order.quantity).toFixed(2)}</p>
+                  <p className="font-semibold">₹{order.isDirectBuy
+      ? (order.price * 87 * order.quantity).toFixed(2)
+      : (order.price * order.quantity).toFixed(2)
+  }</p>
                 </div>
               </div>
 
               {/* ✅ Delivery aur total */}
               <div className="flex justify-between items-center text-sm sm:text-base">
                 <p className="opacity-70">Delivery: {order.delivery}</p>
-                <p className="font-bold text-base sm:text-lg">Total: ₹{order.total}</p>
+                <p className="font-bold text-base sm:text-lg">Total: ₹{(
+    order.isDirectBuy 
+      ? (order.price * 87 * order.quantity).toFixed(2)   // Direct buy → multiply 87
+      : (
+          (order.price * order.quantity) + 
+          (parseFloat(order.deliveryPrice || 0)) + 
+          (parseFloat(order.tax || 0))
+        ).toFixed(2)   // Cart → add delivery + tax
+  )}</p>
               </div>
             </div>
           ))}

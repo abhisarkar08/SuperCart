@@ -252,10 +252,10 @@ const Navbar = () => {
               <NavLink to="/cart" className="transition-all duration-200 ease-in-out flex items-center justify-center rounded-full bg-gray-100 w-12 h-12 hover:bg-gray-200">
                 <FaShoppingCart className="text-xl text-gray-500 " />
               </NavLink>
-              <div className="relative" ref={profileRef}>
+              <div className="relative " ref={profileRef}>
                 <button
                   onClick={() => setShowProfileDropdown(!showProfileDropdown)}
-                  className="flex items-center justify-center rounded-full bg-gray-100 w-12 h-12 hover:bg-gray-200 transition-all duration-200 ease-in-out"
+                  className="flex items-center cursor-pointer justify-center rounded-full bg-gray-100 w-12 h-12 hover:bg-gray-200 transition-all duration-200 ease-in-out"
                 >
                   <FaUser className="cursor-pointer text-xl text-gray-500" />
                 </button>

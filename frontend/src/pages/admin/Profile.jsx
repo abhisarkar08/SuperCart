@@ -5,6 +5,7 @@ import { asynccurrentuser } from "../../Store/Actions/UserAction";
 import { useEffect } from "react";
 import axios from "../../api/Axioscon";
 import { loadUser } from "../../Store/Reducers/UserSlice";
+import { motion } from "framer-motion";
 const Profile = () => {
     const { register, handleSubmit,reset } = useForm();
     const dispatch = useDispatch();
@@ -39,7 +40,11 @@ useEffect(() => {
 }, [user, reset]);
 
   return (
-    <div className="mx-auto max-w-[576px]  mb-[20%] bg-gray-50 sm:mt-[3%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl">
+    <motion.div className="mx-auto max-w-[576px]  mb-[20%] bg-gray-50 sm:mt-[3%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl"
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    >
         <p className="text-black flex gap-2 pl-5 text-2xl mt-2 pt-6 items-center font-bold"><FaUser/>My Profile</p>
         <form
            className="flex flex-col gap-5 mt-9 px-2"
@@ -123,7 +128,7 @@ useEffect(() => {
           </button>
         </div>
         </form>
-    </div>
+    </motion.div>
   )
 }
 

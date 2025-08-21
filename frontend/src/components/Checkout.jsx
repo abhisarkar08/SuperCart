@@ -41,43 +41,51 @@ const Checkout = () => {
   const tax = Number(10)
   const total = (sub + delii + tax)
 
+  const isDirectBuy = cartState?.isDirectBuy || false;  // ✅ new
+
+
   
   const ordersubmit = (data) => {
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
-
-  let newOrders = [];
-
-  if (cartItems && cartItems.length > 0) {
-    // Cart se checkout
-    newOrders = cartItems.map((item) => ({
-      id: item.id,
-      name: item.title || item.name,
-      image: item.thumbnail || item.image,
-      quantity: item.quantity,
-      price: item.price,
-      delivery: deli[selected]?.name || "Standard Delivery",
-      total: total,   // total INR me jo tum state se pass kar rahe ho
-      date: new Date().toISOString()
-    }));
-  } else if (product) {
-    // Single product checkout
-    newOrders = [{
-      id: product.id,
-      name: product.title || product.name,
-      image: product.thumbnail || product.image,
-      quantity: qty,
-      price: product.price,
-      delivery: deli[selected]?.name || "Standard Delivery",
-      total: total,
-      date: new Date().toISOString()
-    }];
-  }
-
-  localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
-  toast.success("Order is placed!! ✅");
-
-  reset();
-};
+    const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  
+    let newOrders = [];
+  
+    if (cartItems && cartItems.length > 0) {
+      // ✅ Cart se checkout → price waise hi
+      newOrders = cartItems.map((item) => ({
+        id: item.id,
+        name: item.title || item.name,
+        image: item.thumbnail || item.image,
+        quantity: item.quantity,
+        price: item.price,  // cart me multiply nahi
+        delivery: deli[selected]?.name || "Standard Delivery",
+        total: total,       // cart me total already pass kiya
+        date: new Date().toISOString(),
+        isDirectBuy: false  // cart order
+      }));
+    } else if (product) {
+      // ✅ Direct buy → price multiply 87
+      const priceInINR = (product.price || 0) * 87;
+  
+      newOrders = [{
+        id: product.id,
+        name: product.title || product.name,
+        image: product.thumbnail || product.image,
+        quantity: qty,
+        price: product.price,       // original USD price
+        delivery: deli[selected]?.name || "Standard Delivery",
+        total: (priceInINR * qty) + tax + parseFloat(deli[selected].price.replace("₹","")), // INR me total
+        date: new Date().toISOString(),
+        isDirectBuy: isDirectBuy
+      }];
+    }
+  
+    localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
+    toast.success("Order is placed!! ✅");
+  
+    reset();
+  };
+  
 
 
 
