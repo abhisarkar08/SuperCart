@@ -1,31 +1,34 @@
 import { useState } from 'react';
-import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FaShoppingCart, FaSearch, FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { asynccurrentuser } from '../Store/Actions/UserAction';
 import { asynclogoutuser, asyncupdateuser } from '../Store/Actions/UserAction';
 import { FiLogOut } from "react-icons/fi";
-// Electronics
-import { FiMonitor } from "react-icons/fi";   // computer monitor
-
-// Fashion
-import { FiShoppingBag } from "react-icons/fi"; // shopping bag
-
-// Grocery
-import { FiShoppingCart } from "react-icons/fi"; // cart for grocery
-
-// Sports
-import { FiActivity } from "react-icons/fi"; // activity/fitness outline
-
-// Home Appliance
-import { FiTv } from "react-icons/fi"; // TV (home appliance)
-
-// Beauty
-import { FiFeather } from "react-icons/fi"; // feather (beauty/softness)
+import { FiMonitor } from "react-icons/fi";
+import { FiShoppingBag } from "react-icons/fi";
+import { FiShoppingCart } from "react-icons/fi"; 
+import { FiActivity } from "react-icons/fi"; 
+import { FiTv } from "react-icons/fi";
+import { FiFeather } from "react-icons/fi"; 
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [query, setQuery] = useState("");
+  const { category } = useParams(); // agar aapka route me category hai toh
+
+  const handleSearch = (e) => {
+    if (e.key === "Enter" && query.trim()) {
+      const encoded = encodeURIComponent(query.trim());
+      // Agar category hai toh use kare, warna global products search
+      if (category) {
+        navigate(`/products/${category}?search=${encoded}`);
+      } else {
+        navigate(`/products?search=${encoded}`);
+      }
+    }
+  };
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
@@ -58,14 +61,20 @@ const Navbar = () => {
         <NavLink to="/home" className="text-[1.5rem] font-semibold tracking-tight text-black">SuperCart</NavLink>
 
         {!isAuthPage && (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center text-black gap-2">
             {/* Search toggle */}
             <div className="hidden sm:flex items-center gap-2 w-full bg-gray-100 border border-gray-400 rounded-xl px-3 py-1">
-              <FaSearch className="text-gray-500" />
+              <FaSearch
+                className="text-gray-500 cursor-pointer"
+                onClick={(e) => handleSearch({ key: "Enter" })} // Enter जैसा trigger भेज रहा हूँ
+              />
               <input
                 type="text"
                 placeholder="Search products..."
-                className="bg-transparent outline-none flex-1 text-md"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleSearch}
+                className="bg-transparent outline-none flex-1 text-md text-black placeholder-gray-500"
               />
             </div>
 
@@ -73,7 +82,7 @@ const Navbar = () => {
             {!searchOpen && (
               <button
                 onClick={() => setSearchOpen(true)}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition sm:hidden"
+                className="p-2 rounded-full bg-gray-100  hover:bg-gray-200 transition sm:hidden"
               >
                 <FaSearch className="text-xl text-gray-600" />
               </button>
@@ -148,17 +157,27 @@ const Navbar = () => {
 
       {/* Mobile Search Bar */}
       {!isAuthPage && searchOpen && (
-        <div className="sm:hidden absolute top-20 left-1/2 -translate-x-1/2 w-[90%] flex items-center gap-2 bg-gray-100 border border-gray-400 rounded-xl px-3 py-1 z-50">
-          <FaSearch className="text-gray-500" />
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="bg-transparent outline-none flex-1 text-base"
-          />
-          <button onClick={() => setSearchOpen(false)} className="text-gray-500">
-            ✖
-          </button>
-        </div>
+        <div className="sm:hidden absolute top-20 text-black left-1/2 -translate-x-1/2 w-[90%] flex items-center gap-2 bg-gray-100 border border-gray-400 rounded-xl px-3 py-1 z-50">
+  <FaSearch
+    className="text-gray-500 cursor-pointer"
+    onClick={(e) => handleSearch({ key: "Enter" })} // Enter जैसा trigger
+  />
+  <input
+    type="text"
+    placeholder="Search products..."
+    value={query}
+    onChange={(e) => setQuery(e.target.value)}
+    onKeyDown={handleSearch}
+    className="bg-transparent outline-none flex-1 text-base text-black placeholder-gray-500"
+  />
+  <button
+    onClick={() => setSearchOpen(false)}
+    className="text-gray-500"
+  >
+    ✖
+  </button>
+</div>
+
       )}
 
       {/* Mobile Menu Links - Overlay */}
@@ -217,13 +236,16 @@ const Navbar = () => {
 
             {/* Search Bar */}
             <div className="transition-all duration-200 ease-in-out flex items-center gap-3 bg-gray-50 border border-solid border-gray-300 rounded-xl px-4 py-0.5 w-[35%] focus-within:shadow-lg focus-within:ring-3 focus-within:ring-gray-300">
-              <FaSearch className='text-gray-500' />
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="bg-transparent outline-none text-base font-normal p-1"
-              />
-            </div>
+      <FaSearch className="text-gray-500" />
+      <input
+        type="text"
+        placeholder="Search products..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleSearch}
+        className="bg-transparent outline-none text-base font-normal p-1 flex-1"
+      />
+    </div>
 
             {/* Right Side */}
             <div className="flex gap-4">
@@ -270,29 +292,25 @@ const Navbar = () => {
                     >
                       <span role="img" aria-label="wishlist">❤️</span> Wishlist
                     </NavLink>
-                    {user ? (
-                      <button
-                        onClick={async () => { // 👈 async banaya
-                          setShowProfileDropdown(false);
+                    {user && (
+  <button
+    onClick={async () => {   // ← async lagaya
+      setShowProfileDropdown(false);
 
-                          try {
-                            // 1. Backend update
-                            dispatch(asyncupdateuser(user.id, { isAdmin: false })); 
+      try {
+        await dispatch(asyncupdateuser(user.id, { isAdmin: false }));
+        await dispatch(asynclogoutuser()); // ✅ ab await kaam karega
+        navigate("/login", { replace: true });
+      } catch (err) {
+        console.error("Logout failed:", err);
+      }
+    }}
+    className="cursor-pointer flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
+  >
+    <FiLogOut /> Logout
+  </button>
+)}
 
-                            // 2. Logout
-                            dispatch(asynclogoutuser());
-
-                            // 3. Navigate
-                            navigate("/login");
-                          } catch (err) {
-                            console.error("Logout failed:", err);
-                          }
-                        }}
-                        className="cursor-pointer flex gap-2 px-4 py-3 text-red-600 hover:bg-gray-100 transition-colors text-left w-full font-semibold border-t mt-2"
-                      >
-                        <span><FiLogOut/></span> Logout
-                      </button>
-                    ) : null}
                   </div>
                 )}
               </div>

@@ -166,6 +166,7 @@ const Home = () => {
             className='text-[2.2rem] mb-2 font-bold'
             initial={{opacity:0, y:30}}
             animate={{opacity:1, y:0}}
+
             transition={{duration:0.8, delay:0.5}}
           >
             Why Shop With SuperCart?
@@ -195,6 +196,7 @@ const Home = () => {
             className='flex flex-col items-center gap-2 p-2 text-center group'
             initial={{opacity:0, y:30}}
             animate={{opacity:1, y:0}}
+
             transition={{duration:0.8, delay:1}}
           >
             <div className='text-[2rem] bg-gray-100 p-4 rounded-full transition-colors duration-200 group-hover:bg-gray-200'><AiOutlineWallet/></div>

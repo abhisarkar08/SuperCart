@@ -7424,7 +7424,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/tablets/samsung-galaxy-tab-white/thumbnail.webp"
     },
     {
-      "id": 43,
+      "id": "43",
       "title": "Decoration Swing",
       "description": "The Decoration Swing is a charming addition to your home decor. Crafted with intricate details, it adds a touch of elegance and whimsy to any room.",
       "category": "home-decoration",
@@ -7485,7 +7485,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/home-decoration/decoration-swing/thumbnail.webp"
     },
     {
-      "id": 44,
+      "id": "44",
       "title": "Family Tree Photo Frame",
       "description": "The Family Tree Photo Frame is a sentimental and stylish way to display your cherished family memories. With multiple photo slots, it tells the story of your loved ones.",
       "category": "home-decoration",
@@ -7544,7 +7544,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/home-decoration/family-tree-photo-frame/thumbnail.webp"
     },
     {
-      "id": 45,
+      "id": "45",
       "title": "House Showpiece Plant",
       "description": "The House Showpiece Plant is an artificial plant that brings a touch of nature to your home without the need for maintenance. It adds greenery and style to any space.",
       "category": "home-decoration",
@@ -7605,7 +7605,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/home-decoration/house-showpiece-plant/thumbnail.webp"
     },
     {
-      "id": 46,
+      "id": "46",
       "title": "Plant Pot",
       "description": "The Plant Pot is a stylish container for your favorite plants. With a sleek design, it complements your indoor or outdoor garden, adding a modern touch to your plant display.",
       "category": "home-decoration",
@@ -7667,7 +7667,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/home-decoration/plant-pot/thumbnail.webp"
     },
     {
-      "id": 47,
+      "id": "47",
       "title": "Table Lamp",
       "description": "The Table Lamp is a functional and decorative lighting solution for your living space. With a modern design, it provides both ambient and task lighting, enhancing the atmosphere.",
       "category": "home-decoration",
@@ -7726,7 +7726,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/home-decoration/table-lamp/thumbnail.webp"
     },
     {
-      "id": 11,
+      "id": "11",
       "title": "Annibale Colombo Bed",
       "description": "The Annibale Colombo Bed is a luxurious and elegant bed frame, crafted with high-quality materials for a comfortable and stylish bedroom.",
       "category": "furniture",
@@ -7788,7 +7788,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-bed/thumbnail.webp"
     },
     {
-      "id": 12,
+      "id": "12",
       "title": "Annibale Colombo Sofa",
       "description": "The Annibale Colombo Sofa is a sophisticated and comfortable seating option, featuring exquisite design and premium upholstery for your living room.",
       "category": "furniture",
@@ -7850,7 +7850,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/annibale-colombo-sofa/thumbnail.webp"
     },
     {
-      "id": 13,
+      "id": "13",
       "title": "Bedside Table African Cherry",
       "description": "The Bedside Table in African Cherry is a stylish and functional addition to your bedroom, providing convenient storage space and a touch of elegance.",
       "category": "furniture",
@@ -7912,7 +7912,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/bedside-table-african-cherry/thumbnail.webp"
     },
     {
-      "id": 14,
+      "id": "14",
       "title": "Knoll Saarinen Executive Conference Chair",
       "description": "The Knoll Saarinen Executive Conference Chair is a modern and ergonomic chair, perfect for your office or conference room with its timeless design.",
       "category": "furniture",
@@ -7974,7 +7974,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/knoll-saarinen-executive-conference-chair/thumbnail.webp"
     },
     {
-      "id": 15,
+      "id": "15",
       "title": "Wooden Bathroom Sink With Mirror",
       "description": "The Wooden Bathroom Sink with Mirror is a unique and stylish addition to your bathroom, featuring a wooden sink countertop and a matching mirror.",
       "category": "furniture",
@@ -8036,7 +8036,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/furniture/wooden-bathroom-sink-with-mirror/thumbnail.webp"
     },
     {
-      "id": 48,
+      "id": "48",
       "title": "Bamboo Spatula",
       "description": "The Bamboo Spatula is a versatile kitchen tool made from eco-friendly bamboo. Ideal for flipping, stirring, and serving various dishes.",
       "category": "kitchen-accessories",
@@ -8095,7 +8095,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/bamboo-spatula/thumbnail.webp"
     },
     {
-      "id": 49,
+      "id": "49",
       "title": "Black Aluminium Cup",
       "description": "The Black Aluminium Cup is a stylish and durable cup suitable for both hot and cold beverages. Its sleek black design adds a modern touch to your drinkware collection.",
       "category": "kitchen-accessories",
@@ -8155,7 +8155,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-aluminium-cup/thumbnail.webp"
     },
     {
-      "id": 50,
+      "id": "50",
       "title": "Black Whisk",
       "description": "The Black Whisk is a kitchen essential for whisking and beating ingredients. Its ergonomic handle and sleek design make it a practical and stylish tool.",
       "category": "kitchen-accessories",
@@ -8214,7 +8214,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/black-whisk/thumbnail.webp"
     },
     {
-      "id": 51,
+      "id": "51",
       "title": "Boxed Blender",
       "description": "The Boxed Blender is a powerful and compact blender perfect for smoothies, shakes, and more. Its convenient design and multiple functions make it a versatile kitchen appliance.",
       "category": "kitchen-accessories",
@@ -8276,7 +8276,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/boxed-blender/thumbnail.webp"
     },
     {
-      "id": 52,
+      "id": "52",
       "title": "Carbon Steel Wok",
       "description": "The Carbon Steel Wok is a versatile cooking pan suitable for stir-frying, sautéing, and deep frying. Its sturdy construction ensures even heat distribution for delicious meals.",
       "category": "kitchen-accessories",
@@ -8335,7 +8335,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/carbon-steel-wok/thumbnail.webp"
     },
     {
-      "id": 53,
+      "id": "53",
       "title": "Chopping Board",
       "description": "The Chopping Board is an essential kitchen accessory for food preparation. Made from durable material, it provides a safe and hygienic surface for cutting and chopping.",
       "category": "kitchen-accessories",
@@ -8394,7 +8394,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/chopping-board/thumbnail.webp"
     },
     {
-      "id": 54,
+      "id": "54",
       "title": "Citrus Squeezer Yellow",
       "description": "The Citrus Squeezer in Yellow is a handy tool for extracting juice from citrus fruits. Its vibrant color adds a cheerful touch to your kitchen gadgets.",
       "category": "kitchen-accessories",
@@ -8453,7 +8453,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/citrus-squeezer-yellow/thumbnail.webp"
     },
     {
-      "id": 55,
+      "id": "55",
       "title": "Egg Slicer",
       "description": "The Egg Slicer is a convenient tool for slicing boiled eggs evenly. It's perfect for salads, sandwiches, and other dishes where sliced eggs are desired.",
       "category": "kitchen-accessories",
@@ -8512,7 +8512,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/egg-slicer/thumbnail.webp"
     },
     {
-      "id": 56,
+      "id": "56",
       "title": "Electric Stove",
       "description": "The Electric Stove provides a portable and efficient cooking solution. Ideal for small kitchens or as an additional cooking surface for various culinary needs.",
       "category": "kitchen-accessories",
@@ -8574,7 +8574,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/electric-stove/thumbnail.webp"
     },
     {
-      "id": 57,
+      "id": "57",
       "title": "Fine Mesh Strainer",
       "description": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
       "category": "kitchen-accessories",
@@ -8633,7 +8633,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/fine-mesh-strainer/thumbnail.webp"
     },
     {
-      "id": 58,
+      "id": "58",
       "title": "Fork",
       "description": "The Fork is a classic utensil for various dining and serving purposes. Its durable and ergonomic design makes it a reliable choice for everyday use.",
       "category": "kitchen-accessories",
@@ -8692,7 +8692,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/fork/thumbnail.webp"
     },
     {
-      "id": 59,
+      "id": "59",
       "title": "Glass",
       "description": "The Glass is a versatile and elegant drinking vessel suitable for a variety of beverages. Its clear design allows you to enjoy the colors and textures of your drinks.",
       "category": "kitchen-accessories",
@@ -8751,7 +8751,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/glass/thumbnail.webp"
     },
     {
-      "id": 60,
+      "id": "60",
       "title": "Grater Black",
       "description": "The Grater in Black is a handy kitchen tool for grating cheese, vegetables, and more. Its sleek design and sharp blades make food preparation efficient and easy.",
       "category": "kitchen-accessories",
@@ -8810,7 +8810,7 @@
       "thumbnail": "https://cdn.dummyjson.com/product-images/kitchen-accessories/grater-black/thumbnail.webp"
     },
     {
-      "id": 61,
+      "id": "61",
       "title": "Hand Blender",
       "description": "The Hand Blender is a versatile kitchen appliance for blending, pureeing, and mixing. Its compact design and powerful motor make it a convenient tool for various recipes.",
       "category": "kitchen-accessories",
@@ -8870,19 +8870,6 @@
     }
   ],
   "users": [
-    {
-      "id": "swjdcnew",
-      "username": "jhone",
-      "email": "jhone@gmail.com",
-      "password": "123",
-      "isAdmin": "true",
-      "phone": "99102558",
-      "count": "India",
-      "city": "Delhi",
-      "add": "vidisha",
-      "area": "pat",
-      "code": "1192"
-    },
     {
       "id": "ZKS03ORCmuPl2i0WMgJs4",
       "username": "cc",
