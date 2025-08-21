@@ -88,7 +88,7 @@ const Footer = () => {
             {/* Bottom Copyright Section */}
             <div className='border-t border-gray-800 mt-16 pt-10'>
                 <div className='text-center'>
-                    <p className='opacity-90 text-base'>© 2025 SuperCart. All rights reserved. | Privacy Policy | Terms of Service</p>
+                    <p className='opacity-90 text-base'>© 2025 SuperCart. All rights reserved. | Built with ❤️ by Abhishek Sarkar</p>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaTruck, FaHome, FaLeaf, FaCheckCircle, FaMapMarkerAlt, FaPencilAlt, FaWallet  } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import api from "../api/Axioscon";
 
 const Checkout = () => {
   const navig = useNavigate();
@@ -45,46 +46,56 @@ const Checkout = () => {
 
 
   
-  const ordersubmit = (data) => {
-    const orders = JSON.parse(localStorage.getItem("orders")) || [];
-  
-    let newOrders = [];
-  
-    if (cartItems && cartItems.length > 0) {
-      // ✅ Cart se checkout → price waise hi
-      newOrders = cartItems.map((item) => ({
-        id: item.id,
-        name: item.title || item.name,
-        image: item.thumbnail || item.image,
-        quantity: item.quantity,
-        price: item.price,  // cart me multiply nahi
-        delivery: deli[selected]?.name || "Standard Delivery",
-        total: total,       // cart me total already pass kiya
-        date: new Date().toISOString(),
-        isDirectBuy: false  // cart order
-      }));
-    } else if (product) {
-      // ✅ Direct buy → price multiply 87
-      const priceInINR = (product.price || 0) * 87;
-  
-      newOrders = [{
-        id: product.id,
-        name: product.title || product.name,
-        image: product.thumbnail || product.image,
-        quantity: qty,
-        price: product.price,       // original USD price
-        delivery: deli[selected]?.name || "Standard Delivery",
-        total: (priceInINR * qty) + tax + parseFloat(deli[selected].price.replace("₹","")), // INR me total
-        date: new Date().toISOString(),
-        isDirectBuy: isDirectBuy
-      }];
+  const ordersubmit = async (data) => {
+  const orders = JSON.parse(localStorage.getItem("orders")) || [];
+  let newOrders = [];
+
+  if (cartItems && cartItems.length > 0) {
+    newOrders = cartItems.map((item) => ({
+      id: item.id,
+      name: item.title || item.name,
+      image: item.thumbnail || item.image,
+      quantity: item.quantity,
+      price: item.price,
+      delivery: deli[selected]?.name || "Standard Delivery",
+      total: total,
+      date: new Date().toISOString(),
+      isDirectBuy: false,
+      userId: JSON.parse(localStorage.getItem("user"))?.id || null
+    }));
+  } else if (product) {
+    const priceInINR = (product.price || 0) * 87;
+    newOrders = [{
+      id: product.id,
+      name: product.title || product.name,
+      image: product.thumbnail || product.image,
+      quantity: qty,
+      price: product.price,
+      delivery: deli[selected]?.name || "Standard Delivery",
+      total: (priceInINR * qty) + tax + parseFloat(deli[selected].price.replace("₹","")),
+      date: new Date().toISOString(),
+      isDirectBuy: isDirectBuy,
+      userId: JSON.parse(localStorage.getItem("user"))?.id || null
+    }];
+  }
+
+  // LocalStorage me save
+  localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
+
+  try {
+    // Backend me save using axios instance
+    for (let order of newOrders) {
+      await api.post("/orders", order); // yaha global baseURL use hoga
     }
-  
-    localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
-    toast.success("Order is placed!! ✅");
-  
-    reset();
-  };
+
+    toast.success("Order placed and saved to database!");
+  } catch (error) {
+    console.error("Order save error:", error);
+    toast.error("Order placed locally but not saved on server!");
+  }
+
+  reset();
+};
   
 
 

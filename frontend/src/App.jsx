@@ -18,13 +18,17 @@ const App = () => {
   useEffect(()=>{
     dispatch(asyncloadpro());
   },[])
+
+  
+  const { loading } = useSelector((state) => state.productReducer);
+
   return (
     <div className='text-white font-thin w-100% overflow-x-hidden min-h-screen bg-white flex flex-col'>
       <Nav/>
       <div className="flex-1 pt-[70px] px-[18px]">
         <Mainroutes />
       </div>
-      <Footer/>
+      {!loading && <Footer />}
     </div>
   )
 }

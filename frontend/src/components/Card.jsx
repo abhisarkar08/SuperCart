@@ -8,12 +8,13 @@ const Card = ({product}) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
-    e.preventDefault(); 
-    dispatch(addToCart({
-      ...product,
-      price: (product.price * 87).toFixed(2),  // 👈 yahan convert karke bhej do
-    }));
-  };
+  e.preventDefault();
+  dispatch(addToCart({
+    ...product,
+    price: Number((product.price * 87).toFixed(2)), // Convert to number
+    quantity: 1, // Add default quantity
+  }));
+};
 
   return (
     <Link to={`/singleCard/${product.id}`} className="block">

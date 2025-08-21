@@ -1,8 +1,12 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../../components/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
+import Nav from "../../components/Nav";
+import Loader from "../../components/Loader"; // Loader component
+import { asyncloadpro } from "../../Store/Actions/ProductAction";
+
 
 const categoryMap = {
   beauty: ["beauty", "fragrances"],
@@ -42,12 +46,26 @@ const Products = () => {
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  const products = useSelector((state) => state.productReducer.products) || [];
+  // Get products & loading from Redux
+  const { products = [], loading } = useSelector((state) => state.productReducer);
 
   const [sortType, setSortType] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedBrands, setSelectedBrands] = useState([]);
+
+  const handleBrandChange = (brand) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand)
+        ? prev.filter((b) => b !== brand)
+        : [...prev, brand]
+    );
+  };
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(asyncloadpro());
+  }, [dispatch, category]);
 
   // Step 1: Filter by category first
   const categoryProducts = products.filter((p) => {
@@ -59,27 +77,19 @@ const Products = () => {
     return allowedCategories.includes(cat);
   });
 
-  // Step 2: Filter by search (for brand list also)
+  // Step 2: Filter by search
   const searchFilteredProducts = categoryProducts.filter((p) => {
     if (!searchQuery) return true;
     const title = p?.title?.toLowerCase?.() || "";
     return title.includes(searchQuery);
   });
 
-  // Step 3: Available brands based on search + category
+  // Step 3: Available brands
   const availableBrands = [
     ...new Set(searchFilteredProducts.map((p) => p?.brand).filter(Boolean)),
   ];
 
-  const handleBrandChange = (brand) => {
-    setSelectedBrands((prev) =>
-      prev.includes(brand)
-        ? prev.filter((b) => b !== brand)
-        : [...prev, brand]
-    );
-  };
-
-  // Step 4: Final filtered products
+  // Step 4: Final filtered products with price & brand filter + sorting
   const filteredProducts = searchFilteredProducts
     .filter((p) => {
       const min = minPrice !== "" ? parseFloat(minPrice) : 0;
@@ -99,8 +109,23 @@ const Products = () => {
       return 0;
     });
 
+  // If loading, show Nav + Loader only, Footer hidden
+  if (loading) {
+    return (
+      <div className="flex flex-col min-h-screen">
+        <Nav />
+        <div className="flex-1 flex justify-center items-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-8 text-black md:max-w-[1536px] md:mx-auto">
+      <Nav />
+
+      {/* Header Section */}
       <section className="p-4 flex flex-col gap-1 justify-center items-center">
         <h2 className="text-3xl sm:text-4xl md:text-[2.4rem] font-semibold mb-2">
           {category
@@ -116,11 +141,10 @@ const Products = () => {
           {filteredProducts.length} Products Found
         </p>
 
+        {/* Sort */}
         <div className="flex flex-col w-full md:flex-row md:items-center gap-1 md:justify-end md:gap-2">
           <label className="text-base font-normal opacity-60 flex flex-row gap-1 items-center">
-            <span>
-              <FiSettings />
-            </span>
+            <FiSettings />
             Sort By:
           </label>
           <select
@@ -137,6 +161,7 @@ const Products = () => {
         </div>
       </section>
 
+      {/* Main Section */}
       <section className="flex flex-row gap-10 justify-center">
         {/* Sidebar Filter */}
         <div
@@ -151,7 +176,7 @@ const Products = () => {
               <h3 className="text-md font-medium opacity-80">Brand</h3>
               <div className="flex flex-col gap-2 max-h-[130px] overflow-y-auto">
                 {availableBrands.map((brand) => (
-                  <label key={brand} className="flex items-center gap-2">
+                  <label key={brand} className="flex items-center text-base font-normal gap-2">
                     <input
                       type="checkbox"
                       checked={selectedBrands.includes(brand)}
@@ -205,15 +230,27 @@ const Products = () => {
               ))}
             </div>
           ) : (
-            "No products found"
+            <div className="flex flex-col gap-2 text-black justify-center max-w-[1076.8px] w-screen items-center h-screen mx-auto">
+              <div>
+                <img src="/search.png" alt="img" />
+              </div>
+              <div className="flex flex-col gap-2 justify-center items-center">
+                <h1 className="text-2xl font-semibold">No products found</h1>
+                <h1 className="text-lg font-normal opacity-70 px-[2.5rem] text-center">
+                  Try adjusting your filters or search terms
+                </h1>
+              </div>
+            </div>
           )}
         </div>
       </section>
+
     </div>
   );
 };
 
 export default Products;
+
 
 
 
