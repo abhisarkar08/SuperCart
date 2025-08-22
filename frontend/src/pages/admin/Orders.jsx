@@ -13,7 +13,7 @@ const Orders = () => {
   }, []);
 
   return (
-    <div className="text-black min-h-screen flex flex-col">
+    <div className="text-black min-h-screen flex flex-col max-w-[1241px] mx-auto">
       <div className='flex items-center gap-2 mt-[15px] px-3'>
         <div className="w-8 h-8 sm:w-12 sm:h-12 text-blue-500">
           <FiBox className="w-full h-full" />

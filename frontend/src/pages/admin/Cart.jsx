@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart } from "../../Store/Reducers/CartSlice";
 import { HiArrowLeft, HiDocumentText } from 'react-icons/hi';
+import {toast} from 'react-toastify'
 
 const Cart = () => {
   const navig = useNavigate();
@@ -33,6 +34,10 @@ const Cart = () => {
       },
     });
   };
+  const handleRemove = (id) => {
+  toast.success('🗑️ Item removed from cart!');
+  dispatch(removeFromCart(id));
+};
 
   if (cartItems.length === 0) {
 
@@ -139,7 +144,7 @@ const Cart = () => {
                     <p>₹{(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                   <button
-                    onClick={() =>{ dispatch(removeFromCart(item.id)); toast.success('🗑️ Item removed from cart!');}}
+                    onClick={() => handleRemove(item.id)}
                     className="text-red-500 absolute -right-3 sm:static cursor-pointer font-semibold sm:text-3xl"
                   >
                     ×

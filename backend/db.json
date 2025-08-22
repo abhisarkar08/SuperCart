@@ -8876,7 +8876,7 @@
       "password": "aa",
       "email": "sarkarsharmita08@gmail.com",
       "isAdmin": true,
-      "phone": "9810057396",
+      "phone": "9810057398",
       "count": "india",
       "city": "delhi",
       "add": "aa",
@@ -8885,5 +8885,42 @@
       "name": "cc"
     }
   ],
-  "orders": []
+  "orders": [
+    {
+      "id": "134",
+      "name": "Vivo S1",
+      "image": "https://cdn.dummyjson.com/product-images/smartphones/vivo-s1/thumbnail.webp",
+      "quantity": 1,
+      "price": 21749.13,
+      "delivery": "Eco Delivery",
+      "total": 20,
+      "date": "2025-08-22T20:40:24.494Z",
+      "isDirectBuy": false,
+      "userId": "ZKS03ORCmuPl2i0WMgJs4"
+    },
+    {
+      "id": "79",
+      "name": "Asus Zenbook Pro Dual Screen Laptop",
+      "image": "https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/thumbnail.webp",
+      "quantity": 1,
+      "price": 156599.13,
+      "delivery": "Eco Delivery",
+      "total": 20,
+      "date": "2025-08-22T20:40:24.495Z",
+      "isDirectBuy": false,
+      "userId": "ZKS03ORCmuPl2i0WMgJs4"
+    },
+    {
+      "id": "20",
+      "name": "Cooking Oil",
+      "image": "https://cdn.dummyjson.com/product-images/groceries/cooking-oil/thumbnail.webp",
+      "quantity": 4,
+      "price": "434.13",
+      "delivery": "Eco Delivery",
+      "total": 20,
+      "date": "2025-08-22T20:40:24.495Z",
+      "isDirectBuy": false,
+      "userId": "ZKS03ORCmuPl2i0WMgJs4"
+    }
+  ]
 }

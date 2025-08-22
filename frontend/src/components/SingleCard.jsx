@@ -9,6 +9,7 @@ import { FiThumbsUp } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { addToCart } from "../Store/Reducers/CartSlice";
 import { addToCartBackend } from '../Store/Actions/CartAction';
+import {toast} from 'react-toastify'
 
 const SingleCard = () => {
   const { id } = useParams();
@@ -39,11 +40,13 @@ const SingleCard = () => {
       const updatedWishlist = wishlist.filter(item => item.id !== product.id);
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
       setLike(false);
+       toast.error("Removed from Wishlist");
     } else {
 
       const updatedWishlist = [...wishlist, product];
       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
       setLike(true);
+      toast.success("Added to Wishlist"); 
     }
   };
 
@@ -105,7 +108,7 @@ const SingleCard = () => {
 
   return (
     <div className="mx-1 flex flex-col gap-0 text-black mt-5">
-      <div className="flex flex-col md:flex-row md:gap-8 max-w-[1232px]">
+      <div className="flex flex-col md:flex-row md:gap-8 max-w-[1232px] mx-auto">
         <div className="flex-1 flex flex-col gap-0">
           <div className="relative flex-1 max-h-[500px] hover:scale-102 transition-all duration-300">
             <img
@@ -194,7 +197,7 @@ const SingleCard = () => {
       </div>
 
 
-      <div className="flex flex-col gap-2 max-w-[1232px]">
+      <div className="flex flex-col gap-2 w-full xl:w-[85%] mx-auto max-w-[1241px]">
         <div className="flex flex-row gap-6 items-center text-sm mb-2">
           <div className={`cursor-pointer font-normal ${activeTab === "description" ? "font-bold" : ""}`} onClick={() => setActiveTab("description")}>Description</div>
           <div className={`cursor-pointer text-center font-normal ${activeTab === "general" ? "font-bold" : ""}`} onClick={() => setActiveTab("general")}>General Information</div>
@@ -239,7 +242,7 @@ const SingleCard = () => {
 
         <div>
           {activeTab === "general" && (
-            <div className="flex flex-col gap-2 bg-gray-100 rounded-lg gap-8 sm:flex-row sm:mb-[2rem] md:mt-[1rem]">
+            <div className="flex flex-col gap-2 bg-gray-100  rounded-lg gap-8 sm:flex-row sm:mb-[2rem] md:mt-[1rem]">
               <div className=" flex-1 flex flex-col gap-4 sm:justify-between sm:gap-6 sm:p-6">
                 <div className="flex flex-row justify-between px-6 opcity-50">Width <span className="font-normal">{product.dimensions.width}</span></div>
                 <div className="flex flex-row justify-between px-6 opcity-50">Height <span className="font-normal">{product.dimensions.height}</span></div>
