@@ -7,10 +7,10 @@ body {
 
 @layer utilities {
   .no-scrollbar-x::-webkit-scrollbar:horizontal {
-    display: none; /* Chrome, Safari, Opera */
+    display: none;
   }
   .no-scrollbar-x {
-    scrollbar-width: none;     /* Firefox */
-    -ms-overflow-style: none;  /* IE & Edge */
+    scrollbar-width: none;     
+    -ms-overflow-style: none;  
   }
 }

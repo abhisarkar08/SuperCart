@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import { FiSettings } from "react-icons/fi";
 import Nav from "../../components/Nav";
-import Loader from "../../components/Loader"; // Loader component
+import Loader from "../../components/Loader"; 
 import { asyncloadpro } from "../../Store/Actions/ProductAction";
 
 
@@ -46,7 +46,7 @@ const Products = () => {
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search")?.toLowerCase() || "";
 
-  // Get products & loading from Redux
+
   const { products = [], loading } = useSelector((state) => state.productReducer);
 
   const [sortType, setSortType] = useState("");
@@ -67,7 +67,7 @@ const Products = () => {
     dispatch(asyncloadpro());
   }, [dispatch, category]);
 
-  // Step 1: Filter by category first
+
   const categoryProducts = products.filter((p) => {
     if (!category) return true;
     const cat = p?.category?.toLowerCase?.() || "";
@@ -77,19 +77,18 @@ const Products = () => {
     return allowedCategories.includes(cat);
   });
 
-  // Step 2: Filter by search
+
   const searchFilteredProducts = categoryProducts.filter((p) => {
     if (!searchQuery) return true;
     const title = p?.title?.toLowerCase?.() || "";
     return title.includes(searchQuery);
   });
 
-  // Step 3: Available brands
   const availableBrands = [
     ...new Set(searchFilteredProducts.map((p) => p?.brand).filter(Boolean)),
   ];
 
-  // Step 4: Final filtered products with price & brand filter + sorting
+
   const filteredProducts = searchFilteredProducts
     .filter((p) => {
       const min = minPrice !== "" ? parseFloat(minPrice) : 0;
@@ -109,7 +108,7 @@ const Products = () => {
       return 0;
     });
 
-  // If loading, show Nav + Loader only, Footer hidden
+
   if (loading) {
     return (
       <div className="flex flex-col min-h-screen">
@@ -125,13 +124,13 @@ const Products = () => {
     <div className="space-y-8 text-black md:max-w-[1536px] md:mx-auto">
       <Nav />
 
-      {/* Header Section */}
+
       <section className="p-4 flex flex-col gap-1 justify-center items-center">
         <h2 className="text-3xl sm:text-4xl md:text-[2.4rem] font-semibold mb-2">
           {category
             ? categoryDisplayNames[category] ||
-              (category?.charAt?.(0)?.toUpperCase?.() || "") +
-                (category?.slice?.(1) || "")
+            (category?.charAt?.(0)?.toUpperCase?.() || "") +
+            (category?.slice?.(1) || "")
             : "All Products"}
         </h2>
         <p className="text-lg font-normal opacity-60 text-center mb-2">
@@ -141,7 +140,7 @@ const Products = () => {
           {filteredProducts.length} Products Found
         </p>
 
-        {/* Sort */}
+
         <div className="flex flex-col w-full md:flex-row md:items-center gap-1 md:justify-end md:gap-2">
           <label className="text-base font-normal opacity-60 flex flex-row gap-1 items-center">
             <FiSettings />
@@ -161,9 +160,9 @@ const Products = () => {
         </div>
       </section>
 
-      {/* Main Section */}
+
       <section className="flex flex-row gap-10 justify-center">
-        {/* Sidebar Filter */}
+
         <div
           className={`hidden lg:flex flex-col gap-6 px-6 py-4 rounded w-[43%] max-w-[368px] shadow-md bg-white
           sticky top-[8rem]
@@ -221,7 +220,6 @@ const Products = () => {
           </button>
         </div>
 
-        {/* Product Cards */}
         <div>
           {filteredProducts.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

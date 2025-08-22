@@ -8,7 +8,7 @@ export const asyncloadpro = (category) => async (dispatch) => {
     const startTime = Date.now();
     const { data } = await axios.get('/products');
     const elapsed = Date.now() - startTime;
-    const minDelay = 1000; // 1 second minimum
+    const minDelay = 1000;
 
     if (elapsed < minDelay) {
       await new Promise((resolve) => setTimeout(resolve, minDelay - elapsed));

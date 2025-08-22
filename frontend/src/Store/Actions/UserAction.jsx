@@ -6,20 +6,20 @@ export const asynccurrentuser = () => async (dispatch, getState) => {
     const stored = localStorage.getItem("user");
     if (!stored) return console.log("User not logged in !!");
     const user = JSON.parse(stored);
-    if(user) dispatch(loadUser(user));
+    if (user) dispatch(loadUser(user));
   } catch (error) {
     console.log(error);
   }
 };
 
 export const asynclogoutuser = () => async (dispatch, getState) => {
-    try {
-      localStorage.removeItem("user");
-      dispatch(loadUser(null));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  try {
+    localStorage.removeItem("user");
+    dispatch(loadUser(null));
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const asyncgetuser = (user) => async (dispatch) => {
   try {
@@ -28,18 +28,18 @@ export const asyncgetuser = (user) => async (dispatch) => {
     );
 
     if (res.data.length === 0) {
-      return null; // <-- not found
+      return null;
     }
 
     const foundUser = res.data[0];
 
-    // LocalStorage me save karo
+
     localStorage.setItem("user", JSON.stringify(foundUser));
 
-    // Redux store me load karo
+
     dispatch(loadUser(foundUser));
 
-    return foundUser; // <-- object return
+    return foundUser; 
   } catch (error) {
     console.log(error);
     return null;
@@ -51,7 +51,7 @@ export const asyncpostuser = (user) => async (dispatch, getState) => {
   try {
     const res = await axios.post("/users", user);
     dispatch(loadUser(res.data));
-    localStorage.setItem("user", JSON.stringify(res.data)); 
+    localStorage.setItem("user", JSON.stringify(res.data));
   } catch (error) {
     console.log(error);
   }

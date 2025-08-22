@@ -6,7 +6,7 @@ const Orders = () => {
   const navig = useNavigate();
   const [orders, setOrders] = useState([]);
 
-  // ✅ orders localStorage se read karo
+
   useEffect(() => {
     const savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
     setOrders(savedOrders);
@@ -22,7 +22,7 @@ const Orders = () => {
       </div>
 
       {orders.length === 0 ? (
-        // ✅ Agar koi order nahi hai
+
         <div className='flex flex-col mx-auto my-auto justify-center items-center gap-3'>
           <div className="w-20 h-20 sm:w-30 sm:h-30 text-blue-200">
             <FiBox className="w-full h-full" />
@@ -36,7 +36,6 @@ const Orders = () => {
           </div>
         </div>
       ) : (
-        // ✅ Agar orders hai to render karo
         <div className="flex flex-col gap-6 p-5">
           {orders.map((order, index) => (
             <div key={index} className="border p-4 rounded-lg shadow-md bg-white flex flex-col gap-3">
@@ -45,7 +44,7 @@ const Orders = () => {
                 <p className="text-xs opacity-60">{new Date(order.date).toLocaleString()}</p>
               </div>
 
-              {/* ✅ Ab sirf ek product ka data dikhana hai */}
+
               <div className="flex justify-between items-center border-b pb-2">
                 <div className="flex items-center gap-3">
                   <img
@@ -58,24 +57,24 @@ const Orders = () => {
                 <div className="flex gap-4 text-xs sm:text-base">
                   <p>. qty. {order.quantity}</p>
                   <p className="font-semibold">₹{order.isDirectBuy
-      ? (order.price * 87 * order.quantity).toFixed(2)
-      : (order.price * order.quantity).toFixed(2)
-  }</p>
+                    ? (order.price * 87 * order.quantity).toFixed(2)
+                    : (order.price * order.quantity).toFixed(2)
+                  }</p>
                 </div>
               </div>
 
-              {/* ✅ Delivery aur total */}
+
               <div className="flex justify-between items-center text-sm sm:text-base">
                 <p className="opacity-70">Delivery: {order.delivery}</p>
                 <p className="font-bold text-base sm:text-lg">Total: ₹{(
-    order.isDirectBuy 
-      ? (order.price * 87 * order.quantity).toFixed(2)   // Direct buy → multiply 87
-      : (
-          (order.price * order.quantity) + 
-          (parseFloat(order.deliveryPrice || 0)) + 
-          (parseFloat(order.tax || 0))
-        ).toFixed(2)   // Cart → add delivery + tax
-  )}</p>
+                  order.isDirectBuy
+                    ? (order.price * 87 * order.quantity).toFixed(2) 
+                    : (
+                      (order.price * order.quantity) +
+                      (parseFloat(order.deliveryPrice || 0)) +
+                      (parseFloat(order.tax || 0))
+                    ).toFixed(2)  
+                )}</p>
               </div>
             </div>
           ))}

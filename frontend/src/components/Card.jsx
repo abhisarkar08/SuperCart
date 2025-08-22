@@ -4,15 +4,18 @@ import { FaStar } from "react-icons/fa"
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../Store/Reducers/CartSlice"; 
+import { toast } from 'react-toastify';
 const Card = ({product}) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = (e) => {
   e.preventDefault();
+  toast.success("Item added to cart");
   dispatch(addToCart({
     ...product,
-    price: Number((product.price * 87).toFixed(2)), // Convert to number
-    quantity: 1, // Add default quantity
+    price: Number((product.price * 87).toFixed(2)), 
+    quantity: 1,
+    
   }));
 };
 
@@ -33,7 +36,7 @@ const Card = ({product}) => {
               product.brand ? "opacity-100" : "opacity-0"
             }`}
           >
-            {product.brand || "Brand"} {/* optional placeholder */}
+            {product.brand || "Brand"} 
           </h1>
           <h1 className="flex flex-row gap-1 items-center font-semibold sm:text-lg md:text-base">
             <span className="text-yellow-500 sm:text-lg"><FaStar /></span> {product.rating}
@@ -54,7 +57,7 @@ const Card = ({product}) => {
 
         <div className="flex flex-row justify-between items-center font-semibold p-3 gap-1">
           <h1 className="text-2xl sm:text-3xl md:text-2xl lg:text-xl xl:text-2xl">₹{((product.price)*87).toFixed(2)}</h1>
-          <button onClick={handleAddToCart} className="flex cursor-pointer flex-row gap-1 bg-black text-white rounded-lg active-97 px-3 py-2 text-md items-center sm:text-lg md:text-base lg:p-1 lg:whitespace-nowrap lg:text-sm xl:px-3 xl:text-base xl:py-1">
+          <button onClick={handleAddToCart}  className="flex cursor-pointer flex-row gap-1 bg-black text-white rounded-lg active-97 px-3 py-2 text-md items-center sm:text-lg md:text-base lg:p-1 lg:whitespace-nowrap lg:text-sm xl:px-3 xl:text-base xl:py-1">
             <span><LuShoppingCart /></span> Add to Cart
           </button>
         </div>

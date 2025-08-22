@@ -1,31 +1,30 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { lazy } from "react";
+const Orders = lazy(() => import("../pages/admin/Orders"))
+const SingleCard = lazy(() => import("../components/SingleCard"));
+const Checkout = lazy(() => import("../components/Checkout"));
+const Products = lazy(() => import("../pages/users/Products"));
+const Home = lazy(() => import('../pages/Home'));
+const Login = lazy(() => import("../pages/Login"));
+const Register = lazy(() => import("../pages/Register"));
+const Profile = lazy(() => import('../pages/admin/Profile'));
+const Cart = lazy(() => import('../pages/admin/Cart'));
+const Pagenotfound = lazy(() => import('../Pagenotfound'));
+const Wishlist = lazy(() => import('../pages/admin/Wishlist'));
 
-const Orders = lazy(()=> import("../pages/admin/Orders"))
-const SingleCard = lazy(()=> import("../components/SingleCard"));
-const Checkout  = lazy(()=> import("../components/Checkout"));
-const Products  = lazy(()=> import("../pages/users/Products"));
-const Home = lazy(()=> import('../pages/Home'));
-const Login = lazy(()=> import("../pages/Login"));
-const Register = lazy(()=> import("../pages/Register"));
-const Profile = lazy(()=> import('../pages/admin/Profile'));
-const Cart = lazy(()=> import('../pages/admin/Cart'));
-const Pagenotfound = lazy(()=> import('../Pagenotfound'));
-const Wishlist = lazy(()=> import('../pages/admin/Wishlist'));
-const Mainroutes = () =>{
+const Mainroutes = () => {
   const user = useSelector(state => state.userReducer?.data);
   const location = useLocation();
 
-  // === FIX START ===
-  // Jab user null hai aur woh protected route pe gaya, to turant login dikhao
+
   const publicPaths = ["/", "/login"];
   const isPublicPath = publicPaths.includes(location.pathname);
 
   if (!user && !isPublicPath) {
     return <Navigate to="/login" replace />;
   }
-  // === FIX END ===
+
 
   return (
     <Routes>

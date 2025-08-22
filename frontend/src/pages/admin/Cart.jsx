@@ -35,26 +35,25 @@ const Cart = () => {
   };
 
   if (cartItems.length === 0) {
-    // 👇 tumhara same layout empty cart ke liye
+
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
         <div className="text-center max-w-md mx-auto">
-          {/* Shopping Cart Icon */}
+
           <div className="flex justify-center mb-4 md:mb-6">
             <FaShoppingCart className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gray-400" />
           </div>
 
-          {/* Main Heading */}
+
           <h1 className="text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-3 md:mb-4">
             Your Cart is Empty
           </h1>
 
-          {/* Subtitle */}
           <h4 className="text-md sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 md:mb-8">
             Looks like you haven't added any items to your cart yet
           </h4>
 
-          {/* Continue Shopping Button */}
+
           <button
             onClick={() => navig("/home")}
             className="inline-flex items-center gap-2 bg-black active:scale-97 text-white font-semibold py-2 px-4 sm:py-3 sm:px-6 md:py-3 md:px-6 text-sm sm:text-base md:text-lg rounded-lg transition-colors duration-200 cursor-pointer"
@@ -67,7 +66,7 @@ const Cart = () => {
     );
   }
 
-  // 👇 Agar cart me items hain
+
   return (
     <div className="min-h-screen  bg-[#FEFFFF] text-black w-screen pt-5 -mx-[18px] px-5 text-black">
       <div className='flex flex-col gap-4 mb-[4rem] max-w-[1280px] mx-auto'>
@@ -140,7 +139,7 @@ const Cart = () => {
                     <p>₹{(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                   <button
-                    onClick={() => dispatch(removeFromCart(item.id))}
+                    onClick={() =>{ dispatch(removeFromCart(item.id)); toast.success('🗑️ Item removed from cart!');}}
                     className="text-red-500 absolute -right-3 sm:static cursor-pointer font-semibold sm:text-3xl"
                   >
                     ×

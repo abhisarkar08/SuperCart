@@ -5,6 +5,7 @@ import { Tooltip } from 'react-tooltip'
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { asyncpostuser } from "../Store/Actions/UserAction";
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify'
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const Register = () => {
     data.id = nanoid();
     data.isAdmin = true
     dispatch(asyncpostuser(data));
+    toast.success('Registered Successfull!')
     reset()
     navig("/home");
   };

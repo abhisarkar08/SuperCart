@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { asyncgetuser} from "./Store/Actions/UserAction";
+import { asyncgetuser } from "./Store/Actions/UserAction";
 import { useDispatch, useSelector } from 'react-redux';
 import Mainroutes from './Routes/Mainroutes';
 import Nav from './components/Nav';
@@ -9,22 +9,22 @@ const App = () => {
   const data = useSelector((state) => state.userReducer.data);
   const dispatch = useDispatch();
 
-  useEffect(() =>{
+  useEffect(() => {
     const storeuser = JSON.parse(localStorage.getItem("user"))
-    if(storeuser){
+    if (storeuser) {
       dispatch(asyncgetuser(storeuser));
     }
   }, [dispatch]);
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(asyncloadpro());
-  },[])
+  }, [])
 
-  
+
   const { loading } = useSelector((state) => state.productReducer);
 
   return (
     <div className='text-white font-thin w-100% overflow-x-hidden min-h-screen bg-white flex flex-col'>
-      <Nav/>
+      <Nav />
       <div className="flex-1 pt-[70px] px-[18px]">
         <Mainroutes />
       </div>

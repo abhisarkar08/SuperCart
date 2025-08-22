@@ -1,5 +1,5 @@
-// cartActions.js
-import api from "../../api/Axioscon"; // tumhara axios instance
+
+import api from "../../api/Axioscon";
 
 export const addToCartBackend = async (product, userId, qty = 1) => {
   try {

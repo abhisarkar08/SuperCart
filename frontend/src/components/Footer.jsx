@@ -10,9 +10,9 @@ const Footer = () => {
     }
   return (
     <div className='w-full  bg-gray-900 text-gray-300'>
-        <div className='w-full px-8 py-16'> {/* Full width with more padding */}
+        <div className='w-full px-8 py-16'> 
             <div className='grid grid-cols-1 md:grid-cols-4 gap-12'>
-                {/* Company Info Section */}
+
                 <div className='space-y-6'>
                     <h1 className='text-white text-[clamp(1rem,3vw,1.4rem)] font-semibold'>SuperCart</h1>
                     <p className='text-[clamp(0.9rem,3vw,1.1rem)] text-gray-400 leading-8'>
@@ -34,7 +34,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Popular Categories */}
+
                 <div>
                     <h2 className='text-white text-xl font-semibold mb-8'>Popular Categories</h2>
                     <div className='space-y-4'>
@@ -47,7 +47,6 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Customer Service */}
                 <div>
                     <h2 className='text-white text-xl font-semibold mb-8'>Customer Service</h2>
                     <div className='space-y-4'>
@@ -59,7 +58,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Get in Touch */}
+
                 <div>
                     <h2 className='text-white text-xl font-semibold mb-8'>Get in Touch</h2>
                     <div className='space-y-5'>
@@ -79,13 +78,13 @@ const Footer = () => {
                             <div className='w-6 h-6 flex items-center justify-center mt-1'>
                                 <FaMapMarkerAlt className='text-gray-400 text-sm'/>
                             </div>
-                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>123 Commerce St, City, State 12345</p>
+                            <p className='text-gray-400 text-base hover:text-white cursor-pointer transition-colors'>123, Delhi, India</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom Copyright Section */}
+
             <div className='border-t border-gray-800 mt-16 pt-10'>
                 <div className='text-center'>
                     <p className='opacity-90 text-base'>© 2025 SuperCart. All rights reserved. | Built with ❤️ by Abhishek Sarkar</p>

@@ -24,7 +24,7 @@ const Navbar = () => {
   const location = useLocation();
   const { category } = useParams();
 
-  // ­­­­­­­­­­­­­­­­­­­ STATE ­­­­­­­­­­­­­­­­­­
+
   const [query, setQuery] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -33,7 +33,6 @@ const Navbar = () => {
   const user = useSelector((state) => state.userReducer?.data);
   const profileRef = useRef(null);
 
-  // ­­­­­­­­­­­­­­­­­­­ HELPERS ­­­­­­­­­­­­­­­­­­
   const closeMobileMenu = () => setMenuOpen(false);
 
   const handleSearch = (e) => {
@@ -44,8 +43,8 @@ const Navbar = () => {
       } else {
         navigate(`/products?search=${encoded}`);
       }
-      setSearchOpen(false);        // mobile search bar close
-      closeMobileMenu();           // safety: close menu as well
+      setSearchOpen(false);
+      closeMobileMenu();
     }
   };
 
@@ -58,12 +57,11 @@ const Navbar = () => {
 
   const isAuthPage = location.pathname === '/login' || location.pathname === '/';
 
-  // ­­­­­­­­­­­­­­­­­­­ EFFECTS ­­­­­­­­­­­­­­­­­­
+
   useEffect(() => {
     dispatch(asynccurrentuser());
   }, [dispatch]);
 
-  // close profile dropdown when clicking outside
   useEffect(() => {
     function handleClickOutside(e) {
       if (profileRef.current && !profileRef.current.contains(e.target)) {
@@ -74,26 +72,26 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // close profile dropdown & mobile panels on route change
+
   useEffect(() => {
     setShowProfileDropdown(false);
     closeMobileMenu();
     setSearchOpen(false);
   }, [location]);
 
-  // ­­­­­­­­­­­­­­­­­­­ RENDER ­­­­­­­­­­­­­­­­­­
+
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-white/70 backdrop-blur-md border-b border-gray-200 shadow-md">
       {/* ────────── MOBILE NAVBAR ────────── */}
       <div className="flex items-center justify-between px-4 py-3 text-black lg:hidden">
-        {/* logo */}
+
         <NavLink to="/home" className="text-[1.5rem] font-semibold tracking-tight text-black">
           SuperCart
         </NavLink>
 
         {!isAuthPage && (
           <div className="flex items-center text-black gap-2">
-            {/* inline search (≥ sm) */}
+
             <div className="hidden sm:flex items-center gap-2 w-full bg-gray-100 border border-gray-400 rounded-xl px-3 py-1">
               <FaSearch className="text-gray-500 cursor-pointer" onClick={() => handleSearch({ key: 'Enter' })} />
               <input
@@ -106,7 +104,7 @@ const Navbar = () => {
               />
             </div>
 
-            {/* search toggle (mobile) */}
+
             {!searchOpen && (
               <button
                 onClick={() => setSearchOpen(true)}
@@ -116,12 +114,11 @@ const Navbar = () => {
               </button>
             )}
 
-            {/* cart */}
+
             <NavLink to="/cart" className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition">
               <FaShoppingCart className="text-xl text-gray-600" />
             </NavLink>
 
-            {/* profile */}
             <div className="relative" ref={profileRef}>
               <button
                 onClick={() => setShowProfileDropdown(!showProfileDropdown)}
@@ -170,7 +167,7 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* hamburger */}
+
             <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 rounded-full hover:bg-gray-100">
               {menuOpen ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
             </button>
@@ -178,7 +175,7 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* mobile search bar overlay */}
+
       {!isAuthPage && searchOpen && (
         <div className="sm:hidden absolute top-20 left-1/2 -translate-x-1/2 w-[90%] flex items-center gap-2 bg-gray-100 border border-gray-400 rounded-xl px-3 py-1 z-50">
           <FaSearch className="text-gray-500 cursor-pointer" onClick={() => handleSearch({ key: 'Enter' })} />
@@ -194,7 +191,7 @@ const Navbar = () => {
         </div>
       )}
 
-      {/* mobile menu overlay */}
+
       {!isAuthPage && menuOpen && (
         <div className="text-black absolute top-20 left-1/2 w-[90%] -translate-x-1/2 rounded-xl bg-white shadow-md px-6 py-4 z-50 lg:hidden">
           <div className="flex flex-col gap-3 font-semibold">
