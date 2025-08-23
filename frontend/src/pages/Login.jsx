@@ -5,6 +5,8 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { useDispatch, useSelector } from 'react-redux';
 import { asyncgetuser, asyncupdateuser} from "../Store/Actions/UserAction";
 import {toast} from 'react-toastify'
+import { loadUser } from '../Store/Reducers/UserSlice';
+
 const Login = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
