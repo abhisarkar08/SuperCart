@@ -1,14 +1,10 @@
-// api/index.js
-
 import express from 'express';
-import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 
 const app = express();
 
-// Enable CORS for all origins
-app.use(cors());
+// No CORS needed for same-origin relative requests
 
 app.use(express.json());
 
@@ -25,7 +21,7 @@ const getDbData = () => {
 // Health check
 app.get('/', (_, res) => res.json({ status: 'API Working!' }));
 
-// Products
+// Products endpoint
 app.get('/products', (_, res) => {
   const { products = [] } = getDbData();
   res.json(products);
@@ -41,7 +37,7 @@ app.get('/users', (req, res) => {
   res.json(users);
 });
 
-// Register
+// Register endpoint
 app.post('/users', (req, res) => {
   const newUser = req.body;
   const db = getDbData();
@@ -59,6 +55,7 @@ app.post('/users', (req, res) => {
 });
 
 export default app;
+
 
 
 
