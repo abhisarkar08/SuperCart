@@ -18,13 +18,12 @@ const Mainroutes = () => {
   const location = useLocation();
 
 
-  const publicPaths = ["/", "/login"];
+  const publicPaths = ["/", "/login", "/register"];
   const isPublicPath = publicPaths.includes(location.pathname);
 
-  if (!user && !isPublicPath) {
-    return <Navigate to="/login" replace />;
-  }
-
+  if (!user && !publicPaths.includes(location.pathname)) {
+  return <Navigate to="/login" replace />;
+}
 
   return (
     <Routes>
