@@ -19,6 +19,7 @@ const Login = () => {
       const found = users.find(u => u.email === data.email && u.password === data.password);
       if (found) {
         localStorage.setItem("currentUser", JSON.stringify(found));
+        dispatch(loadUser(found));
         navig("/home");
         toast.success('Welcome Back!');
         reset();

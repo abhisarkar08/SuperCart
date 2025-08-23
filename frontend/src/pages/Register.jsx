@@ -24,6 +24,7 @@ const Register = () => {
       }
       users.push(data);
       localStorage.setItem("users", JSON.stringify(users));
+      dispatch(loadUser(data));
       toast.success('Registered Successfull!');
       reset();
       navig("/home");

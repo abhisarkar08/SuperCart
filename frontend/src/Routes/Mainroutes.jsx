@@ -18,7 +18,7 @@ const Mainroutes = () => {
   const location = useLocation();
 
 
-  const publicPaths = ["/", "/login", "/register"];
+  const publicPaths = ["/", "/login"];
   const isPublicPath = publicPaths.includes(location.pathname);
 
   if (!user && !publicPaths.includes(location.pathname)) {
