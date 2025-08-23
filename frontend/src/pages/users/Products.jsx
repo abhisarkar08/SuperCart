@@ -63,9 +63,9 @@ const Products = () => {
   };
 
   const dispatch = useDispatch();
+  useEffect(() => {
   const isHosted = window.location.hostname !== "localhost";
 
-useEffect(() => {
   if (isHosted) {
     const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
     dispatch({ type: "SET_PRODUCTS", payload: storedProducts });
