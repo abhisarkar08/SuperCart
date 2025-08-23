@@ -1,74 +1,64 @@
 // api/index.js
 
-const express = require('express')
-const fs = require('fs')
-const path = require('path')
+import express from 'express';
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
 
-const app = express()
+const app = express();
 
-// ===== CORS SETUP =====
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')             // allow any origin
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,OPTIONS') // allowed methods
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type') // allowed headers
-  if (req.method === 'OPTIONS') return res.sendStatus(204)      // preflight
-  next()
-})
-// ======================
+// Enable CORS for all origins
+app.use(cors());
 
-app.use(express.json())
+app.use(express.json());
 
-// Read db.json from backend folder
+// Read backend/db.json
 const getDbData = () => {
   try {
-    const dbPath = path.join(process.cwd(), 'backend/db.json')
-    const rawData = fs.readFileSync(dbPath, 'utf8')
-    return JSON.parse(rawData)
+    const dbPath = path.join(process.cwd(), 'backend/db.json');
+    return JSON.parse(fs.readFileSync(dbPath, 'utf8'));
   } catch {
-    return { products: [], users: [] }
+    return { products: [], users: [] };
   }
-}
+};
 
 // Health check
-app.get('/', (req, res) => {
-  res.json({ status: 'API Working!' })
-})
+app.get('/', (_, res) => res.json({ status: 'API Working!' }));
 
-// Products endpoint
-app.get('/products', (req, res) => {
-  const data = getDbData()
-  res.json(data.products || [])
-})
+// Products
+app.get('/products', (_, res) => {
+  const { products = [] } = getDbData();
+  res.json(products);
+});
 
 // Users with optional filtering
 app.get('/users', (req, res) => {
-  const { email, password } = req.query
-  const db = getDbData()
-  let users = db.users || []
+  const { email, password } = req.query;
+  let { users = [] } = getDbData();
   if (email && password) {
-    users = users.filter(u => u.email === email && u.password === password)
+    users = users.filter(u => u.email === email && u.password === password);
   }
-  res.json(users)
-})
+  res.json(users);
+});
 
-// Registration endpoint
+// Register
 app.post('/users', (req, res) => {
-  const newUser = req.body
-  const db = getDbData()
-  const users = db.users || []
+  const newUser = req.body;
+  const db = getDbData();
+  const users = db.users || [];
   if (users.find(u => u.email === newUser.email)) {
-    return res.status(400).json({ error: 'Email already registered' })
+    return res.status(400).json({ error: 'Email already registered' });
   }
-  users.push(newUser)
+  users.push(newUser);
   fs.writeFileSync(
     path.join(process.cwd(), 'backend/db.json'),
     JSON.stringify({ ...db, users }, null, 2),
     'utf8'
-  )
-  res.status(201).json(newUser)
-})
+  );
+  res.status(201).json(newUser);
+});
 
-module.exports = app
+export default app;
 
 
 
