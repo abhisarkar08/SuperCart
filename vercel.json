@@ -1,14 +1,18 @@
 {
   "version": 2,
   "functions": {
-    "backend/api/server.js": {
-      "memory": 1024
+    "backend/api/index.js": {
+      "runtime": "@vercel/node"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/backend/api/server.js"
+      "src": "/api/(.*)",
+      "dest": "/backend/api/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/dist/$1"
     }
   ]
 }
