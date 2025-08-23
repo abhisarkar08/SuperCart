@@ -6,6 +6,7 @@ import { FiSettings } from "react-icons/fi";
 import Nav from "../../components/Nav";
 import Loader from "../../components/Loader"; 
 import { asyncloadpro } from "../../Store/Actions/ProductAction";
+import defaultProducts from "../../data/product.json";
 
 
 const categoryMap = {
@@ -63,16 +64,17 @@ const Products = () => {
   };
 
   const dispatch = useDispatch();
-  useEffect(() => {
   const isHosted = window.location.hostname !== "localhost";
-
   if (isHosted) {
-    const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-    dispatch({ type: "SET_PRODUCTS", payload: storedProducts });
-  } else {
-    dispatch(asyncloadpro());
+  if (!localStorage.getItem("products")) {
+    localStorage.setItem("products", JSON.stringify(defaultProducts));
   }
-}, [dispatch, category]);
+  const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+  dispatch({ type: "SET_PRODUCTS", payload: storedProducts });
+} else {
+  dispatch(asyncloadpro());
+}
+
 
 
 
