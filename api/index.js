@@ -1,33 +1,32 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import { createServerlessExpress } from '@vercel/node'; // Not mandatory, you can also do manual
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
-
-// No CORS needed for same-origin relative requests
-
 app.use(express.json());
 
-// Read backend/db.json
 const getDbData = () => {
   try {
-    const dbPath = path.join(process.cwd(), 'backend/db.json');
+    const dbPath = path.join(__dirname, '../backend/db.json'); // fixed path
     return JSON.parse(fs.readFileSync(dbPath, 'utf8'));
   } catch {
     return { products: [], users: [] };
   }
 };
 
-// Health check
 app.get('/', (_, res) => res.json({ status: 'API Working!' }));
 
-// Products endpoint
 app.get('/products', (_, res) => {
   const { products = [] } = getDbData();
   res.json(products);
 });
 
-// Users with optional filtering
 app.get('/users', (req, res) => {
   const { email, password } = req.query;
   let { users = [] } = getDbData();
@@ -37,7 +36,6 @@ app.get('/users', (req, res) => {
   res.json(users);
 });
 
-// Register endpoint
 app.post('/users', (req, res) => {
   const newUser = req.body;
   const db = getDbData();
@@ -47,7 +45,7 @@ app.post('/users', (req, res) => {
   }
   users.push(newUser);
   fs.writeFileSync(
-    path.join(process.cwd(), 'backend/db.json'),
+    path.join(__dirname, '../backend/db.json'),
     JSON.stringify({ ...db, users }, null, 2),
     'utf8'
   );
@@ -55,6 +53,7 @@ app.post('/users', (req, res) => {
 });
 
 export default app;
+
 
 
 

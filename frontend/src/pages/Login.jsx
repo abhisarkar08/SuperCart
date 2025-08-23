@@ -8,20 +8,36 @@ import {toast} from 'react-toastify'
 const Login = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
-  const navig = useNavigate()
+  const navig = useNavigate();
   const user = useSelector(state => state.userReducer?.data);
 
   const onLoginHandler = async (data) => {
-  const success = await dispatch(asyncgetuser(data));
-  if (success) {
-    navig("/home");
-    dispatch(asyncupdateuser(success.id, { isAdmin: true }));
-    toast.success('Welcome Back!')
-    reset();
-  } else {
-    toast.error('Invalid Email or Password!');
-  }
-};
+    const isHosted = window.location.hostname !== "localhost";
+
+    if (isHosted) {
+      const users = JSON.parse(localStorage.getItem("users") || "[]");
+      const found = users.find(u => u.email === data.email && u.password === data.password);
+      if (found) {
+        localStorage.setItem("currentUser", JSON.stringify(found));
+        navig("/home");
+        toast.success('Welcome Back!');
+        reset();
+      } else {
+        toast.error('Invalid Email or Password!');
+      }
+    } else {
+      const success = await dispatch(asyncgetuser(data));
+      if (success) {
+        navig("/home");
+        dispatch(asyncupdateuser(success.id, { isAdmin: true }));
+        toast.success('Welcome Back!');
+        reset();
+      } else {
+        toast.error('Invalid Email or Password!');
+      }
+    }
+  };
+
 
   return (
     <div className='mx-auto max-w-[424px]  bg-gray-50 sm:mt-[10%] sm:mx-auto shadow-[0_3px_6px_0_rgba(0,0,0,0.3),0_0_0_1px_rgba(0,0,0,0.02)] rounded-xl'>
