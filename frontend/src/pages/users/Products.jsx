@@ -64,8 +64,18 @@ const Products = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+  const isHosted = window.location.hostname !== "localhost";
+
+  if (isHosted) {
+    // Hosted → localStorage fallback
+    const storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
+    dispatch({ type: "SET_PRODUCTS", payload: storedProducts }); // ya jo reducer use ho raha hai
+  } else {
+    // Localhost → normal API call
     dispatch(asyncloadpro());
-  }, [dispatch, category]);
+  }
+}, [dispatch, category]);
+
 
 
   const categoryProducts = products.filter((p) => {

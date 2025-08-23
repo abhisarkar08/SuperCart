@@ -13,21 +13,30 @@ const Profile = () => {
     const user = useSelector(state => state.userReducer?.data);
 
     const onSaveHandler = async (formData) => {
+    const isHosted = window.location.hostname !== "localhost";
+
+    if (isHosted) {
+        // Hosted → only localStorage + Redux
+        const updatedUser = { ...user, ...formData };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        dispatch(loadUser(updatedUser));
+        reset(updatedUser);
+        toast.success('Profile updated locally!');
+    } else {
+        // Localhost → normal API call
         try {
             const response = await axios.patch(`/users/${user.id}`, formData);
             const updatedUser = { ...user, ...formData };
-
             localStorage.setItem("user", JSON.stringify(updatedUser));
             dispatch(loadUser(updatedUser));
-
-
             reset(updatedUser);
-
-            toast.success('Profile updated successfully!')
+            toast.success('Profile updated successfully!');
         } catch (err) {
             console.error("❌ Error:", err);
         }
-    };
+    }
+};
+
 
     useEffect(() => {
         dispatch(asynccurrentuser());
