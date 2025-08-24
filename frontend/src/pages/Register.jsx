@@ -6,36 +6,18 @@ import { AiOutlineInfoCircle } from "react-icons/ai";
 import { asyncpostuser } from "../Store/Actions/UserAction";
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify'
-import { loadUser } from '../Store/Reducers/UserSlice';
-
 const Register = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   const navig = useNavigate();
 
   const onRegisterHandler = (data) => {
-    const isHosted = window.location.hostname !== "localhost";
     data.id = nanoid();
-    data.isAdmin = true;
-
-    if (isHosted) {
-      const users = JSON.parse(localStorage.getItem("users") || "[]");
-      if (users.find(u => u.email === data.email)) {
-        toast.error('Email already registered!');
-        return;
-      }
-      users.push(data);
-      localStorage.setItem("users", JSON.stringify(users));
-      dispatch(loadUser(data));
-      toast.success('Registered Successfull!');
-      reset();
-      navig("/home");
-    } else {
-      dispatch(asyncpostuser(data));
-      toast.success('Registered Successfull!');
-      reset();
-      navig("/home");
-    }
+    data.isAdmin = true
+    dispatch(asyncpostuser(data));
+    toast.success('Registered Successfull!')
+    reset()
+    navig("/home");
   };
 
   return (

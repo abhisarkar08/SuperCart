@@ -21,9 +21,10 @@ const Mainroutes = () => {
   const publicPaths = ["/", "/login"];
   const isPublicPath = publicPaths.includes(location.pathname);
 
-  if (!user && !publicPaths.includes(location.pathname)) {
-  return <Navigate to="/login" replace />;
-}
+  if (!user && !isPublicPath) {
+    return <Navigate to="/login" replace />;
+  }
+
 
   return (
     <Routes>

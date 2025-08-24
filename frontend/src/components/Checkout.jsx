@@ -45,7 +45,7 @@ const Checkout = () => {
   const isDirectBuy = cartState?.isDirectBuy || false;
 
 
-const isHosted = window.location.hostname !== "localhost";
+
   const ordersubmit = async (data) => {
     const orders = JSON.parse(localStorage.getItem("orders")) || [];
     let newOrders = [];
@@ -81,18 +81,16 @@ const isHosted = window.location.hostname !== "localhost";
 
     localStorage.setItem("orders", JSON.stringify([...orders, ...newOrders]));
 
-    if (!isHosted) {
     try {
+
       for (let order of newOrders) {
         await api.post("/orders", order);
       }
+
       toast.success("Order placed!");
     } catch (error) {
-      toast.error("Order placed locally but failed on server!");
+      toast.error("Order placed locally but not saved on server!");
     }
-  } else {
-    toast.success("Order placed locally!");
-  }
 
     reset();
   };

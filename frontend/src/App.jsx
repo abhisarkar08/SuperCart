@@ -8,7 +8,6 @@ import { asyncloadpro } from './Store/Actions/ProductAction';
 const App = () => {
   const data = useSelector((state) => state.userReducer.data);
   const dispatch = useDispatch();
-  const isHosted = window.location.hostname !== "localhost";
 
   useEffect(() => {
     const storeuser = JSON.parse(localStorage.getItem("user"))
@@ -17,18 +16,8 @@ const App = () => {
     }
   }, [dispatch]);
   useEffect(() => {
-    if (isHosted) {
-      // Hosted → localStorage fallback
-      if (!localStorage.getItem("products")) {
-        localStorage.setItem("products", JSON.stringify(defaultProducts));
-      }
-      const storedProducts = JSON.parse(localStorage.getItem("products"));
-      dispatch({ type: "SET_PRODUCTS", payload: storedProducts });
-    } else {
-      // Localhost → normal API call
-      dispatch(asyncloadpro());
-    }
-  }, [dispatch]);
+    dispatch(asyncloadpro());
+  }, [])
 
 
   const { loading } = useSelector((state) => state.productReducer);

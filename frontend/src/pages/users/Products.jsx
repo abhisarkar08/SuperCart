@@ -6,7 +6,6 @@ import { FiSettings } from "react-icons/fi";
 import Nav from "../../components/Nav";
 import Loader from "../../components/Loader"; 
 import { asyncloadpro } from "../../Store/Actions/ProductAction";
-import axios from "../../api/Axioscon";
 
 
 const categoryMap = {
@@ -64,25 +63,9 @@ const Products = () => {
   };
 
   const dispatch = useDispatch();
-useEffect(() => {
-  const fetchProducts = async () => {
-    if (window.location.hostname === "localhost") {
-      // Localhost → backend
-      dispatch(asyncloadpro());
-    } else {
-      // Hosted → static products.json
-      try {
-        const res = await axios.get("/products.json");
-        localStorage.setItem("products", JSON.stringify(res.data));
-        dispatch({ type: "SET_PRODUCTS", payload: res.data });
-      } catch (err) {
-        console.error("Failed to load products:", err);
-      }
-    }
-  };
-
-  fetchProducts();
-}, [dispatch]);
+  useEffect(() => {
+    dispatch(asyncloadpro());
+  }, [dispatch, category]);
 
 
   const categoryProducts = products.filter((p) => {
