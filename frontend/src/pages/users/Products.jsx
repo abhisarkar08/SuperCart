@@ -6,7 +6,7 @@ import { FiSettings } from "react-icons/fi";
 import Nav from "../../components/Nav";
 import Loader from "../../components/Loader"; 
 import { asyncloadpro } from "../../Store/Actions/ProductAction";
-import defaultProducts from "../../../public/products.json";
+import axios from "../../api/Axioscon";
 
 
 const categoryMap = {
