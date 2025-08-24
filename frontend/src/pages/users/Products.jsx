@@ -65,22 +65,23 @@ const Products = () => {
 
   const dispatch = useDispatch();
 useEffect(() => {
-  const isHosted = window.location.hostname !== "localhost";
-
-  if (isHosted) {
-    let storedProducts = JSON.parse(localStorage.getItem("products") || "[]");
-
-    if (storedProducts.length === 0) {
-      // First time visit: set default products
-      localStorage.setItem("products", JSON.stringify(defaultProducts));
-      storedProducts = defaultProducts;
+  const fetchProducts = async () => {
+    if (window.location.hostname === "localhost") {
+      // Localhost → backend
+      dispatch(asyncloadpro());
+    } else {
+      // Hosted → static products.json
+      try {
+        const res = await axios.get("/products.json");
+        localStorage.setItem("products", JSON.stringify(res.data));
+        dispatch({ type: "SET_PRODUCTS", payload: res.data });
+      } catch (err) {
+        console.error("Failed to load products:", err);
+      }
     }
+  };
 
-    dispatch({ type: "SET_PRODUCTS", payload: storedProducts });
-  } else {
-    // Localhost: load from backend
-    dispatch(asyncloadpro());
-  }
+  fetchProducts();
 }, [dispatch]);
 
 
