@@ -1,12 +1,11 @@
-
 {
   "name": "mock-backend",
   "version": "1.0.0",
   "dependencies": {
+    "cross-env": "^10.0.0",
     "json-server": "^1.0.0-beta.3"
   },
   "scripts": {
-    "start": "json-server --watch db.json --port ${PORT:-3000}"
+    "start": "cross-env PORT=3000 json-server --watch db.json"
   }
 }
-
